@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "jsx": "react",
+    "strict": true
+  }
+}
