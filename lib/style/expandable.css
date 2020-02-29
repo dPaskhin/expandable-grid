@@ -1,0 +1,20 @@
+.grid {
+    display: flex;
+    position: relative;
+    margin: -10px;
+    flex-wrap: wrap;
+    transition: height .5s;
+}
+
+.grid__item {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 10px;
+    transition-property: height, top, left, right;
+    transition-duration: 300ms;
+    z-index: 50;
+}
+
+.grid__item--expanded {
+    z-index: 100;
+}
