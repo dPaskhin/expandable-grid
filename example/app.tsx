@@ -30,7 +30,10 @@ export const App: React.FC = () => {
                             <div
                                 className='example-item__close'
                                 title='Collapse item'
-                                onClick={() => setExpandedItem(null)}
+                                onClick={(event: React.MouseEvent) => {
+                                    event.stopPropagation()
+                                    setExpandedItem(null)
+                                }}
                             >
                                 <i className='material-icons'>clear</i>
                             </div>

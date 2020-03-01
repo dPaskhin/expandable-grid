@@ -11,8 +11,9 @@ import { IProps } from './interfaces/props'
 
 import {
     getChildrenItem,
+    getGridItemPadding,
+    getGridMargins,
     getInitialItems,
-    getItemY,
     getPosition
 } from './utils/functions'
 import { modifyItems } from './utils/modifierItems'
@@ -23,7 +24,10 @@ export const ExpandableGrid: React.FC<IProps> = ({
     expandedItem = null,
     itemHeight = 150,
     expandedItemHeight = 350,
-    columnsCount = 3
+    columnsCount = 3,
+    rowGap = null,
+    columnGap = null,
+    transitionDuration = null
 }) => {
     const diffHeight = expandedItemHeight - itemHeight
     const [_expandedItem, setExpandedItem] = useState(expandedItem)
@@ -54,7 +58,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
     }, [_expandedItem])
 
     const initialItems: IItem[] = useMemo(() => {
-        if (!children) {
+        if (!children || (children instanceof Array && children.length === 0)) {
             throw Error('You should pass children items')
         }
 
@@ -64,10 +68,8 @@ export const ExpandableGrid: React.FC<IProps> = ({
     const [items, setItems] = useState<IItem[]>(initialItems)
 
     const gridHeight = useMemo(() => {
-        const rowsCount = _expandedItem !== null && items.length !== 1 ?
-            getItemY(items.length + columnsCount, columnsCount) + 1
-            :
-            getItemY(items.length, columnsCount) + 1
+        const needAdditionalRow = _expandedItem !== null && items.length % columnsCount !== 1 && columnsCount !== 1
+        const rowsCount = Math.ceil(items.length / columnsCount) + (needAdditionalRow ? 1 : 0)
 
         if (_expandedItem !== null) {
             return rowsCount * itemHeight + diffHeight
@@ -77,13 +79,21 @@ export const ExpandableGrid: React.FC<IProps> = ({
     }, [itemHeight, _expandedItem])
 
     return (
-        <div className='grid' style={{ height: `${gridHeight}px` }}>
+        <div className='_expandable-grid' style={{
+            height: gridHeight,
+            ...getGridMargins(rowGap, columnGap),
+            transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
+        }}>
             {items.map((item, index) => (
                 <div key={index}
-                     className={`grid__item ${expandedItem === index && 'grid__item--expanded'}`}
+                     className={
+                         `_expandable-grid__item ${expandedItem === index ? '_expandable-grid__item--expanded' : ''}`
+                     }
                      style={{
                          ...getPosition(items[index], itemHeight, diffHeight, columnsCount),
-                         height: index === _expandedItem ? expandedItemHeight : itemHeight
+                         height: index === _expandedItem ? expandedItemHeight : itemHeight,
+                         ...getGridItemPadding(rowGap, columnGap),
+                         transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
                      }}
                 >{getChildrenItem(children, index)}</div>
             ))}

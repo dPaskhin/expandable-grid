@@ -71,3 +71,21 @@ export const getChildrenItem = (children: React.ReactNode[] | React.ReactNode, i
 
     return children
 }
+
+export const getGridMargins = (rowGap: number | null, columnGap: number | null) => {
+    return {
+        marginTop: rowGap !== null ? -rowGap / 2 : undefined,
+        marginBottom: rowGap !== null ? -rowGap / 2 : undefined,
+        marginLeft: columnGap !== null ? -columnGap / 2 : undefined,
+        marginRight: columnGap !== null ? -columnGap / 2 : undefined
+    }
+}
+
+export const getGridItemPadding = (rowGap: number | null, columnGap: number | null) => {
+    return {
+        paddingTop: rowGap !== null ? rowGap / 2 : undefined,
+        paddingBottom: rowGap !== null ? rowGap / 2 : undefined,
+        paddingLeft: columnGap !== null ? columnGap / 2 : undefined,
+        paddingRight: columnGap !== null ? columnGap / 2 : undefined
+    }
+}

@@ -6,4 +6,7 @@ export interface IProps {
     itemHeight?: number
     expandedItemHeight?: number
     columnsCount?: number
+    rowGap?: number | null
+    columnGap?: number | null
+    transitionDuration?: number | null
 }
