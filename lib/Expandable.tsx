@@ -27,7 +27,9 @@ export const ExpandableGrid: React.FC<IProps> = ({
     columnsCount = 3,
     rowGap = null,
     columnGap = null,
-    transitionDuration = null
+    transitionDuration = null,
+    gridClassName = '',
+    gridItemClassName = '',
 }) => {
     const diffHeight = expandedItemHeight - itemHeight
     const [_expandedItem, setExpandedItem] = useState(expandedItem)
@@ -79,23 +81,28 @@ export const ExpandableGrid: React.FC<IProps> = ({
     }, [itemHeight, _expandedItem])
 
     return (
-        <div className='_expandable-grid' style={{
-            height: gridHeight,
-            ...getGridMargins(rowGap, columnGap),
-            transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
-        }}>
+        <div
+            className={`_expandable-grid ${gridClassName}`}
+            style={{
+                ...getGridMargins(rowGap, columnGap),
+                height: gridHeight,
+                transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
+            }}
+        >
             {items.map((item, index) => (
                 <div key={index}
                      className={
-                         `_expandable-grid__item ${expandedItem === index ? '_expandable-grid__item--expanded' : ''}`
+                         `_expandable-grid__item ${expandedItem === index ? '_expandable-grid__item--expanded' : ''} ${gridItemClassName}`
                      }
                      style={{
                          ...getPosition(items[index], itemHeight, diffHeight, columnsCount),
-                         height: index === _expandedItem ? expandedItemHeight : itemHeight,
                          ...getGridItemPadding(rowGap, columnGap),
+                         height: index === _expandedItem ? expandedItemHeight : itemHeight,
                          transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
                      }}
-                >{getChildrenItem(children, index)}</div>
+                >
+                    {getChildrenItem(children, index)}
+                </div>
             ))}
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { ExpandableGrid } from '../lib/Expandable'
 import './style.css'
@@ -6,6 +6,25 @@ import './style.css'
 
 export const App: React.FC = () => {
     const [expandedItem, setExpandedItem] = useState<number | null>()
+
+    const [throttledValue, setThrottledValue] = useState(expandedItem)
+    const lastRan = useRef(Date.now())
+
+    useEffect(
+        () => {
+            const handler = setTimeout(function () {
+                if (Date.now() - lastRan.current >= 600) {
+                    setThrottledValue(expandedItem)
+                    lastRan.current = Date.now()
+                }
+            }, 600 - (Date.now() - lastRan.current))
+
+            return () => {
+                clearTimeout(handler)
+            }
+        },
+        [expandedItem, 600]
+    )
 
     const items = [
         '#68ecb2',
@@ -18,7 +37,7 @@ export const App: React.FC = () => {
 
     return (
         <React.Fragment>
-            <ExpandableGrid expandedItem={expandedItem}>
+            <ExpandableGrid expandedItem={throttledValue}>
                 {items.map((i, index) => (
                     <div
                         key={index}
@@ -26,7 +45,7 @@ export const App: React.FC = () => {
                         style={{ backgroundColor: i }}
                         onClick={() => setExpandedItem(index)}
                     >
-                        {expandedItem === index && (
+                        {throttledValue === index && (
                             <div
                                 className='example-item__close'
                                 title='Collapse item'

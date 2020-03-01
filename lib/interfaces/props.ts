@@ -9,4 +9,6 @@ export interface IProps {
     rowGap?: number | null
     columnGap?: number | null
     transitionDuration?: number | null
+    gridClassName?: string
+    gridItemClassName?: string
 }
