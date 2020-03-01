@@ -34,7 +34,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
                 return expandedItem
             }
 
-            if (expandedItem === null || expandedItem === item) {
+            if (expandedItem === null) {
                 return null
             }
 

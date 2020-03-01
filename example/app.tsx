@@ -17,15 +17,34 @@ export const App: React.FC = () => {
     ]
 
     return (
-        <ExpandableGrid expandedItem={expandedItem}>
-            {items.map((i, index) => (
-                <div
-                    key={index}
-                    className='example-item'
-                    style={{ backgroundColor: i }}
-                    onClick={() => setExpandedItem(index)}
-                />
-            ))}
-        </ExpandableGrid>
+        <React.Fragment>
+            <ExpandableGrid expandedItem={expandedItem}>
+                {items.map((i, index) => (
+                    <div
+                        key={index}
+                        className='example-item'
+                        style={{ backgroundColor: i }}
+                        onClick={() => setExpandedItem(index)}
+                    >
+                        {expandedItem === index && (
+                            <div
+                                className='example-item__close'
+                                title='Collapse item'
+                                onClick={() => setExpandedItem(null)}
+                            >
+                                <i className='material-icons'>clear</i>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </ExpandableGrid>
+
+            <div
+                className="waves-effect waves-light btn"
+                onClick={() => setExpandedItem(null)}
+            >
+                Collapse
+            </div>
+        </React.Fragment>
     )
 }
