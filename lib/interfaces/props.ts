@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { IMediaColumn, IMediaGap, IMediaHeight } from './interfaces'
+
 export interface IProps {
     children: React.ReactNode[] | React.ReactNode
     expandedItem?: number | null
@@ -11,4 +13,11 @@ export interface IProps {
     transitionDuration?: number | null
     gridClassName?: string
     gridItemClassName?: string
+    adaptive?: {
+        heights?: IMediaHeight[]
+        columnsCounts?: IMediaColumn[]
+        rowGaps?: IMediaGap[]
+        columnGaps?: IMediaGap[]
+    } | null
+    afterExpandedItemChanged?: ((expandedItem: number | null) => void) | null
 }

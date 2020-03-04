@@ -15,3 +15,23 @@ export interface IPosition {
     left: string | number
     right: string | number
 }
+
+interface IMediaWidth {
+    min: number
+    max: number
+}
+
+export interface IMediaColumn {
+    windowWidth: IMediaWidth
+    columnsCount: number
+}
+
+export interface IMediaHeight {
+    windowWidth: IMediaWidth
+    height: number
+}
+
+export interface IMediaGap {
+    windowWidth: IMediaWidth
+    gap: number
+}

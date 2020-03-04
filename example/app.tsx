@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import { ExpandableGrid } from '../lib/Expandable'
 import './style.css'
@@ -6,25 +6,22 @@ import './style.css'
 
 export const App: React.FC = () => {
     const [expandedItem, setExpandedItem] = useState<number | null>()
+    const [columnsCount, setColumnsCount] = useState<number>(3)
 
-    const [throttledValue, setThrottledValue] = useState(expandedItem)
-    const lastRan = useRef(Date.now())
-
-    useEffect(
-        () => {
-            const handler = setTimeout(function () {
-                if (Date.now() - lastRan.current >= 600) {
-                    setThrottledValue(expandedItem)
-                    lastRan.current = Date.now()
-                }
-            }, 600 - (Date.now() - lastRan.current))
-
-            return () => {
-                clearTimeout(handler)
-            }
-        },
-        [expandedItem, 600]
-    )
+    const adaptive = {
+        heights: [
+            {windowWidth: {min: 0, max: 320}, height: 100},
+            {windowWidth: {min: 321, max: 768}, height: 150},
+            {windowWidth: {min: 769, max: 1020}, height: 200},
+            {windowWidth: {min: 1025, max: 1280}, height: 300}
+        ],
+        columnsCounts: [
+            {windowWidth: {min: 0, max: 320}, columnsCount: 1},
+            {windowWidth: {min: 321, max: 768}, columnsCount: 2},
+            {windowWidth: {min: 769, max: 1024}, columnsCount: 3},
+            {windowWidth: {min: 1025, max: 1280}, columnsCount: 4}
+        ]
+    }
 
     const items = [
         '#68ecb2',
@@ -37,7 +34,16 @@ export const App: React.FC = () => {
 
     return (
         <React.Fragment>
-            <ExpandableGrid expandedItem={throttledValue}>
+            <ExpandableGrid
+                expandedItem={expandedItem}
+                itemHeight={200}
+                // adaptive={adaptive}
+                columnsCount={columnsCount}
+                afterExpandedItemChanged={item => {
+                    console.log('here')
+                    setExpandedItem(item)
+                }}
+            >
                 {items.map((i, index) => (
                     <div
                         key={index}
@@ -45,7 +51,7 @@ export const App: React.FC = () => {
                         style={{ backgroundColor: i }}
                         onClick={() => setExpandedItem(index)}
                     >
-                        {throttledValue === index && (
+                        {expandedItem === index && (
                             <div
                                 className='example-item__close'
                                 title='Collapse item'
@@ -61,11 +67,27 @@ export const App: React.FC = () => {
                 ))}
             </ExpandableGrid>
 
-            <div
-                className="waves-effect waves-light btn"
-                onClick={() => setExpandedItem(null)}
-            >
-                Collapse
+            <div className='control-panel'>
+                <div
+                    className="waves-effect waves-light btn"
+                    onClick={() => setExpandedItem(null)}
+                >
+                    Collapse
+                </div>
+
+                <div
+                    className="waves-effect waves-light btn"
+                    onClick={() => setColumnsCount(columnsCount + 1)}
+                >
+                    Columns Count Increase +
+                </div>
+
+                <div
+                    className={`waves-effect waves-light btn ${columnsCount <= 1 ? 'disabled' : ''}`}
+                    onClick={() => setColumnsCount(columnsCount - 1)}
+                >
+                    Columns Count Decrease -
+                </div>
             </div>
         </React.Fragment>
     )

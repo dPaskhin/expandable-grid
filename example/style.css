@@ -1,6 +1,7 @@
-.container {
+.wrapper {
     max-width: 1000px;
-    margin: 100px auto 0;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .example-item {
@@ -24,4 +25,18 @@
 
 .example-item__close i {
     color: white;
+}
+
+.control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .3);
+    z-index: 500;
 }
