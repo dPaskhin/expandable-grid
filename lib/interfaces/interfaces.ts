@@ -21,17 +21,7 @@ interface IMediaWidth {
     max: number
 }
 
-export interface IMediaColumn {
+export interface IMediaValue {
     windowWidth: IMediaWidth
-    columnsCount: number
-}
-
-export interface IMediaHeight {
-    windowWidth: IMediaWidth
-    height: number
-}
-
-export interface IMediaGap {
-    windowWidth: IMediaWidth
-    gap: number
+    value: number
 }

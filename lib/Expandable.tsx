@@ -18,6 +18,7 @@ import {
 } from './utils/functions'
 import { modifyItems } from './utils/modifierItems'
 import { useWindowResizeEffect } from './hooks/useWindowResizeEffect'
+import { getAdaptiveValue } from './utils/getAdaptiveValue'
 
 
 export const ExpandableGrid: React.FC<IProps> = ({
@@ -32,25 +33,13 @@ export const ExpandableGrid: React.FC<IProps> = ({
     gridClassName = '',
     gridItemClassName = '',
     adaptive = null,
-    afterExpandedItemChanged= null
+    afterColumnsCountChanged = null
 }) => {
     const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
 
     const _itemHeight: number = useMemo(() => {
         if (adaptive && adaptive.heights) {
-            const currentHeightObj = adaptive.heights.filter(heightObj => {
-                return (windowWidth >= heightObj.windowWidth.min) && (windowWidth <= heightObj.windowWidth.max)
-            })[0]
-
-            if (currentHeightObj) {
-                return currentHeightObj.height
-            }
-
-            const heightsSum = adaptive.heights
-                .map(heightObj => heightObj.height)
-                .reduce((acc, height) => acc + height, 0)
-
-            return heightsSum / adaptive.heights.length
+            return getAdaptiveValue(windowWidth, adaptive.heights)
         }
 
         return itemHeight
@@ -58,19 +47,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
 
     const _columnsCount: number = useMemo(() => {
         if (adaptive && adaptive.columnsCounts) {
-            const currentCountObj = adaptive.columnsCounts.filter(countObj => {
-                return (windowWidth >= countObj.windowWidth.min) && (windowWidth <= countObj.windowWidth.max)
-            })[0]
-
-            if (currentCountObj) {
-                return currentCountObj.columnsCount
-            }
-
-            const countsSum = adaptive.columnsCounts
-                .map(countObj => countObj.columnsCount)
-                .reduce((acc, count) => acc + count, 0)
-
-            return Math.ceil(countsSum / adaptive.columnsCounts.length)
+            return getAdaptiveValue(windowWidth, adaptive.columnsCounts)
         }
 
         if (columnsCount <= 0) {
@@ -79,6 +56,22 @@ export const ExpandableGrid: React.FC<IProps> = ({
 
         return columnsCount
     }, [windowWidth, columnsCount])
+
+    const _rowGap: number | null = useMemo(() => {
+        if (adaptive && adaptive.rowGaps) {
+            return getAdaptiveValue(windowWidth, adaptive.rowGaps)
+        }
+
+        return rowGap
+    }, [windowWidth, rowGap])
+
+    const _columnGap: number | null = useMemo(() => {
+        if (adaptive && adaptive.columnGaps) {
+            return getAdaptiveValue(windowWidth, adaptive.columnGaps)
+        }
+
+        return columnGap
+    }, [windowWidth, columnGap])
 
     const diffHeight = expandedItemHeight - _itemHeight
     const [_expandedItem, setExpandedItem] = useState(expandedItem)
@@ -115,12 +108,11 @@ export const ExpandableGrid: React.FC<IProps> = ({
         setItems(items => modifyItems(items, _expandedItem, _columnsCount))
     }, [_expandedItem, _columnsCount])
 
-    // todo заменить на флаг columnsCountChanged
     useEffect(() => {
-        if (afterExpandedItemChanged !== null) {
-            afterExpandedItemChanged(_expandedItem)
+        if (afterColumnsCountChanged !== null) {
+            afterColumnsCountChanged(_columnsCount)
         }
-    }, [_expandedItem, _columnsCount])
+    }, [_columnsCount])
 
     useEffect(() => {
         setExpandedItem(null)
@@ -151,7 +143,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
         <div
             className={`_expandable-grid ${gridClassName}`}
             style={{
-                ...getGridMargins(rowGap, columnGap),
+                ...getGridMargins(_rowGap, _columnGap),
                 height: gridHeight,
                 transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
             }}
@@ -163,7 +155,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
                      }
                      style={{
                          ...getPosition(items[index], _itemHeight, diffHeight, _columnsCount),
-                         ...getGridItemPadding(rowGap, columnGap),
+                         ...getGridItemPadding(_rowGap, _columnGap),
                          height: index === _expandedItem ? expandedItemHeight : _itemHeight,
                          transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
                      }}
