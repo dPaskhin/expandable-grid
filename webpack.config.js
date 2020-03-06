@@ -6,9 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const outPutPath = './dist'
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
-const isDev = NODE_ENV === 'development';
+const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
 
 
@@ -37,7 +37,8 @@ module.exports = {
     ],
     devServer: {
         hot: true,
-        contentBase: path.resolve(__dirname, 'dist')
+        contentBase: path.resolve(__dirname, outPutPath),
+        historyApiFallback: true
     },
     module: {
         rules: [
@@ -74,8 +75,8 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader',
-                ],
+                    'css-loader'
+                ]
             }
         ]
     }

@@ -75,9 +75,7 @@ export const getChildrenItem = (children: React.ReactNode[] | React.ReactNode, i
 export const getGridMargins = (rowGap: number | null, columnGap: number | null) => {
     return {
         marginTop: rowGap !== null ? -rowGap / 2 : undefined,
-        marginBottom: rowGap !== null ? -rowGap / 2 : undefined,
         marginLeft: columnGap !== null ? -columnGap / 2 : undefined,
-        marginRight: columnGap !== null ? -columnGap / 2 : undefined
     }
 }
 

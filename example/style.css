@@ -1,7 +1,5 @@
-.wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+.container {
+    padding-top: 20px;
 }
 
 .example-item {
@@ -10,6 +8,11 @@
     height: 100%;
     border-radius: 4px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+.example-item.example-item--expanded {
+    cursor: default;
 }
 
 .btn {
@@ -21,6 +24,29 @@
     top: 30px;
     right: 30px;
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 200ms, transform 200ms;
+    transition-timing-function: ease, cubic-bezier(.8, .5, .2, 1.4);
+}
+
+.example-item__close.enter {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.example-item__close.enter-done {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.example-item__close.exit {
+    opacity: 1;
+    transform: scale(0);
+}
+
+.example-item__close.exit-done {
+    opacity: 0;
+    transform: scale(0);
 }
 
 .example-item__close i {

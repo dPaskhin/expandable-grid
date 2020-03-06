@@ -1,8 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
 
-export const IndexPage = () => (
-    <div className="collection">
-        <Link to='/default'>Default variant</Link>
-    </div>
-)
+import { ExpandableGrid } from '../../lib/Expandable'
+import { items } from '../utils/items'
+import { GridItem } from '../components/GridItem'
+
+export const IndexPage = () => {
+    const [expandedItem, setExpandedItem] = useState<number | null>()
+
+    return (
+        <ExpandableGrid
+            expandedItem={expandedItem}
+        >
+            {items.map((item, index) => (
+                <GridItem
+                    key={index}
+                    isExpanded={expandedItem === index}
+                    onClose={() => setExpandedItem(null)}
+                    onClick={() => setExpandedItem(index)}
+                    style={{ backgroundColor: item }}
+                />
+            ))}
+        </ExpandableGrid>
+    )
+}
