@@ -8,9 +8,7 @@ export const IndexPage = () => {
     const [expandedItem, setExpandedItem] = useState<number | null>()
 
     return (
-        <ExpandableGrid
-            expandedItem={expandedItem}
-        >
+        <ExpandableGrid expandedItem={expandedItem}>
             {items.map((item, index) => (
                 <GridItem
                     key={index}

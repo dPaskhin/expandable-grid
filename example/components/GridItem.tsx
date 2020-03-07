@@ -24,7 +24,7 @@ export const GridItem: React.FC<IProps & DetailedHTMLProps<HTMLAttributes<HTMLDi
             mountOnEnter={true}
         >
             <CloseIcon onClick={event => {
-                // You need to add event.propagation when you want to process any click in expanded block
+                // You need to add event.propagation if you want to handle a click that closes the expanded block
                 event.stopPropagation()
                 onClose()
             }}/>

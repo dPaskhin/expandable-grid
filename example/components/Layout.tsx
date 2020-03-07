@@ -1,24 +1,33 @@
 import React from 'react'
+import { Box, Container, Theme } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { NavBar } from './NavBar'
+
+
+const useStyles = makeStyles((theme: Theme) => ({
+    container: {
+        marginTop: '60px',
+        [theme.breakpoints.down('md')]: {
+            marginTop: '110px',
+        }
+    }
+}))
 
 export const Layout: React.FC = ({
     children
-}) => (
-    <React.Fragment>
-        <div className="navbar-fixed">
-            <nav>
-                <div className="nav-wrapper blue">
-                    <a href="#" className="brand-logo">Expandable grid</a>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><a href="sass.html">Sass</a></li>
-                        <li><a href="badges.html">Components</a></li>
-                        <li><a href="collapsible.html">JavaScript</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+}) => {
+    const classes = useStyles()
 
-        <div className="container">
-            {children}
-        </div>
-    </React.Fragment>
-)
+    return (
+        <React.Fragment>
+            <NavBar/>
+            <Container
+                maxWidth='md'
+                className={classes.container}
+            >
+                {children}
+            </Container>
+        </React.Fragment>
+    )
+}

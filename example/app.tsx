@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { CssBaseline } from '@material-ui/core'
 
-import { IndexPage } from './pages'
 import { Layout } from './components/Layout'
 
-export const App: React.FC = () => {
-    return (
+import { routes } from './utils/routes'
+
+
+export const App: React.FC = () => (
+    <React.Fragment>
+        <CssBaseline/>
         <Router>
             <Switch>
                 <Layout>
-                    <Route
-                        path='/'
-                        exact={true}
-                        component={IndexPage}
-                    />
+                    {routes.map(route => (
+                        <Route
+                            key={route.path}
+                            path={route.path}
+                            exact={route.exact}
+                            component={route.component}
+                        />
+                    ))}
                 </Layout>
             </Switch>
         </Router>
-    )
-}
+    </React.Fragment>
+)
