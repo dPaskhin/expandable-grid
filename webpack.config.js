@@ -14,7 +14,7 @@ const isProd = NODE_ENV === 'production'
 
 module.exports = {
     entry: {
-        bundle: './example/index.tsx'
+        bundle: ['@babel/polyfill', './example/index.tsx']
     },
     output: {
         path: path.resolve(__dirname, outPutPath)

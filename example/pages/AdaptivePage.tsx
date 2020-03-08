@@ -1,33 +1,36 @@
-import React, { useState } from 'react'
-import { Edit } from '@material-ui/icons'
-import { Fab, Theme, Zoom } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useMemo, useState } from 'react'
 
 import { ExpandableGrid } from '../../lib/Expandable'
-import { items } from '../utils/items'
-import { GridItem } from '../components/GridItem'
+import { getItems } from '../utils/items'
+import { ExampleItem } from '../components/ExampleItem'
+import { FloatingButton } from '../components/FloatingButton'
+import { DialogModal } from '../components/DialogModal'
+import { useFormAdaptiveState } from '../hooks/useAdaptiveFormState'
+import { AdaptiveForm } from '../components/AdaptiveForm'
 
-
-const useStyle = makeStyles((theme: Theme) => ({
-    fab: {
-        position: 'fixed',
-        bottom: theme.spacing(5),
-        right: theme.spacing(5),
-        zIndex: 100
-    }
-}))
 
 export const AdaptivePage: React.FC = () => {
     const [expandedItem, setExpandedItem] = useState<number | null>(null)
-    const classes = useStyle()
+    const [isDialogModalOpen, setIsDialogModalOpen] = useState(false)
+    const items = useMemo(() => getItems(), [])
+    const { state, dispatch } = useFormAdaptiveState()
+
 
     return (
         <React.Fragment>
+            <DialogModal
+                isOpen={isDialogModalOpen}
+                onClose={() => setIsDialogModalOpen(false)}
+                title='Customize the grid'
+                description='Here you can customize the grid. Also you can drag this modal window to see how the grid changes.'
+            >
+                <AdaptiveForm/>
+            </DialogModal>
             <ExpandableGrid
                 expandedItem={expandedItem}
             >
                 {items.map((item, index) => (
-                    <GridItem
+                    <ExampleItem
                         key={index}
                         isExpanded={expandedItem === index}
                         onClick={() => setExpandedItem(index)}
@@ -37,14 +40,7 @@ export const AdaptivePage: React.FC = () => {
                 ))}
             </ExpandableGrid>
 
-            <Zoom in={true}>
-                <Fab
-                    className={classes.fab}
-                    color='primary'
-                >
-                    <Edit/>
-                </Fab>
-            </Zoom>
+            <FloatingButton onClick={() => setIsDialogModalOpen(true)}/>
         </React.Fragment>
     )
 }

@@ -8,7 +8,7 @@ interface IProps {
     onClose: () => void
 }
 
-export const GridItem: React.FC<IProps & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({
+export const ExampleItem: React.FC<IProps & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({
     isExpanded,
     onClose,
     ...props

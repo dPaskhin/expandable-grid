@@ -1,18 +1,3 @@
-export const items = [
-    '#68ecb2',
-    '#187dfa',
-    '#852542',
-    '#449221',
-    '#7943c5',
-    '#522c09',
-
-    '#449221',
-    '#7943c5',
-    '#522c09',
-    '#449221',
-    '#7943c5',
-    '#522c09',
-    '#449221',
-    '#7943c5',
-    '#522c09'
-]
+export const getItems = (count: number = 16) => (
+    [...Array(count)].map(_ => '#' + Math.floor(Math.random() * 16777215).toString(16))
+)
