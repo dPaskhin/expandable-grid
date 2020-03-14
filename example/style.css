@@ -71,3 +71,7 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .3);
     z-index: 500;
 }
+
+.form__block {
+    margin-bottom: 20px;
+}

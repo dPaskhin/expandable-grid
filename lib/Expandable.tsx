@@ -38,15 +38,15 @@ export const ExpandableGrid: React.FC<IProps> = ({
     const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
 
     const _itemHeight: number = useMemo(() => {
-        if (adaptive && adaptive.heights) {
+        if (adaptive?.heights?.length) {
             return getAdaptiveValue(windowWidth, adaptive.heights)
         }
 
         return itemHeight
-    }, [windowWidth, itemHeight])
+    }, [windowWidth, itemHeight, adaptive?.heights])
 
     const _columnsCount: number = useMemo(() => {
-        if (adaptive && adaptive.columnsCounts) {
+        if (adaptive?.columnsCounts?.length) {
             return getAdaptiveValue(windowWidth, adaptive.columnsCounts)
         }
 
@@ -58,7 +58,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
     }, [windowWidth, columnsCount])
 
     const _rowGap: number | null = useMemo(() => {
-        if (adaptive && adaptive.rowGaps) {
+        if (adaptive?.rowGaps?.length) {
             return getAdaptiveValue(windowWidth, adaptive.rowGaps)
         }
 
@@ -66,7 +66,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
     }, [windowWidth, rowGap])
 
     const _columnGap: number | null = useMemo(() => {
-        if (adaptive && adaptive.columnGaps) {
+        if (adaptive?.columnGaps?.length) {
             return getAdaptiveValue(windowWidth, adaptive.columnGaps)
         }
 
@@ -77,7 +77,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
     const [_expandedItem, setExpandedItem] = useState(expandedItem)
 
     useWindowResizeEffect(() => {
-        if (adaptive === null) {
+        if (!adaptive) {
             return
         }
         setWindowWidth(window.innerWidth)

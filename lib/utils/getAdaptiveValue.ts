@@ -1,7 +1,7 @@
 import { IMediaValue } from '../interfaces/interfaces'
 
 const getSortedMediaValues = (values: IMediaValue[]) => (
-    values.sort((a, b) => a.windowWidth.min - b.windowWidth.min)
+    [...values].sort((a, b) => a.windowWidth.min - b.windowWidth.min)
 )
 
 export const getAdaptiveValue = (windowWidth: number, values: IMediaValue[]) => {

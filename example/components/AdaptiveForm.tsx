@@ -1,30 +1,27 @@
 import React from 'react'
-import { Box, TextField, Typography } from '@material-ui/core'
 
+import { FormBlock } from './FormBlock'
+import { FormTable } from './FormTable'
+import { IMediaValueWithId } from '../interfaces/IMediaValueWithId'
 
-export const AdaptiveForm: React.FC = () => {
-    return (
-        <form noValidate autoComplete='off'>
-            <div className='form__block'>
-                <Typography variant='h6'>
-                    Heights
-                </Typography>
-                <Box>
-                    <Typography variant='subtitle2'>
-                        Window width range (You need to fill range from small to big)
-                    </Typography>
-                    <Box>
-                        <TextField label='From' fullWidth={true}/>
-                    </Box>
-                    <Box>
-                        <TextField label='To' fullWidth={true}/>
-                    </Box>
-                </Box>
-
-                <Box>
-                    <TextField label='Item height' fullWidth={true}/>
-                </Box>
-            </div>
-        </form>
-    )
+interface IProps {
+    items: Readonly<IMediaValueWithId[]>
+    onSubmit: (item: IMediaValueWithId) => void
+    onRemove: (id: number) => void
 }
+
+export const AdaptiveForm: React.FC<IProps> = ({
+    items,
+    onSubmit,
+    onRemove
+}) => (
+    <React.Fragment>
+        <FormBlock
+            onSubmit={onSubmit}
+        />
+        <FormTable
+            items={items}
+            onRemove={onRemove}
+        />
+    </React.Fragment>
+)

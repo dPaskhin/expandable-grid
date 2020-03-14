@@ -77,7 +77,7 @@ export const NavBar: React.FC = () => {
                     onChange={changeTab}
                     TabIndicatorProps={{ children: <TabIndicator/> }}
                 >
-                    {routes.map((route, index) => (
+                    {routes.map((route) => (
                         <Tab
                             key={route.path}
                             disableFocusRipple={true}
