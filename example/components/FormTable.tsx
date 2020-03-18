@@ -1,11 +1,19 @@
 import React from 'react'
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 
-import { IMediaValueWithId } from '../interfaces/IMediaValueWithId'
+import { IMediaValue } from '../interfaces/IMediaValue'
 
 interface IProps {
-    items: Readonly<IMediaValueWithId[]>
+    items: Readonly<IMediaValue[]>
     onRemove: (id: number) => void
 }
 

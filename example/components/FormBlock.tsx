@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import { Box, Button, TextField, Typography } from '@material-ui/core'
 
-import { IMediaValueWithId } from '../interfaces/IMediaValueWithId'
+import { IMediaValue } from '../interfaces/IMediaValue'
 
 interface IProps {
-    onSubmit: (item: IMediaValueWithId) => void
+    onSubmit: (item: IMediaValue) => void
+    warnings?: string[]
 }
 
-export const FormBlock: React.FC<IProps> = ({ onSubmit }) => {
+export const FormBlock: React.FC<IProps> = ({
+    onSubmit,
+    warnings = []
+}) => {
     const [value, setValue] = useState<number | null>(null)
     const [min, setMin] = useState<number | null>(null)
     const [max, setMax] = useState<number | null>(null)
@@ -26,7 +30,10 @@ export const FormBlock: React.FC<IProps> = ({ onSubmit }) => {
         setValue(null)
     }
 
-    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: 'min' | 'max' | 'value') => {
+    const onChangeHandler = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+        type: 'min' | 'max' | 'value'
+    ) => {
         const value = Number(event.target.value)
         const formattedValue = !isNaN(value) ? value : null
 
@@ -95,6 +102,17 @@ export const FormBlock: React.FC<IProps> = ({ onSubmit }) => {
                 >
                     Submit
                 </Button>
+
+                {warnings?.map((warning, index) => (
+                    <Box key={index}>
+                        <Typography
+                            color='error'
+                            variant='caption'
+                        >
+                            {warning}
+                        </Typography>
+                    </Box>
+                ))}
             </Box>
         </form>
     )

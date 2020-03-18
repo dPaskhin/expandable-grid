@@ -20,7 +20,7 @@ export const SettingsPanel: React.FC<IProps> = ({
     const [tab, setTab] = useState<number>(0)
 
     useEffect(() => {
-        onSettingsChange(settings as Readonly<IAdaptiveSettings>)
+        onSettingsChange(settings)
     }, [settings])
 
     return (

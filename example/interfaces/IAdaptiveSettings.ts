@@ -1,6 +1,6 @@
-import { IMediaValueWithId } from './IMediaValueWithId'
+import { IMediaValue } from './IMediaValue'
 
 export interface IAdaptiveSettings {
-    heights: IMediaValueWithId[]
-    columns: IMediaValueWithId[]
+    readonly heights: Readonly<IMediaValue[]>
+    readonly columns: Readonly<IMediaValue[]>
 }

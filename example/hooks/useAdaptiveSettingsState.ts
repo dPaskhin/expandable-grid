@@ -1,13 +1,12 @@
-import { useReducer } from 'react'
-import { Draft, produce } from 'immer'
+import { Dispatch, useReducer } from 'react'
+import { Draft, produce, castImmutable } from 'immer'
 
 import { IAdaptiveSettings } from '../interfaces/IAdaptiveSettings'
-import { IMediaValue } from '../../lib/interfaces/interfaces'
+import { IMediaValue } from '../interfaces/IMediaValue'
 
 const SET_HEIGHT = 'SET_HEIGHT'
 const SET_COLUMN = 'SET_COLUMN'
 const DELETE_HEIGHT = 'DELETE_HEIGHT'
-
 
 const initialState: IAdaptiveSettings = {
     heights: [],
