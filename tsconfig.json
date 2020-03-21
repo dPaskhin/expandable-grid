@@ -8,6 +8,12 @@
     "moduleResolution": "node",
     "declaration": true,
     "jsx": "react",
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@features/*": ["example/features/*"],
+      "@common/*": ["example/common/*"],
+      "@lib/*": ["lib/*"]
+    }
   }
 }

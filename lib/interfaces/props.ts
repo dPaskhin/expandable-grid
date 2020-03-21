@@ -15,7 +15,7 @@ export interface IProps {
     gridItemClassName?: string
     adaptive?: {
         heights?: IMediaValue[]
-        columnsCounts?: IMediaValue[]
+        columns?: IMediaValue[]
         rowGaps?: IMediaValue[]
         columnGaps?: IMediaValue[]
     } | null

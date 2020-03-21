@@ -3,6 +3,7 @@ const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const outPutPath = './dist'
 
@@ -21,7 +22,8 @@ module.exports = {
     },
     devtool: isDev && 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        plugins: [new TsconfigPathsPlugin()]
     },
     optimization: {
         minimize: isProd
