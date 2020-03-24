@@ -12,7 +12,7 @@
     position: absolute;
     box-sizing: border-box;
     padding: 10px;
-    transition-property: height, top, left, right;
+    transition-property: all;
     transition-duration: 300ms;
     z-index: 50;
 }

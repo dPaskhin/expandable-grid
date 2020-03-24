@@ -2,30 +2,6 @@ import { useMemo } from 'react'
 
 import { IMediaValue } from '@common/interfaces/IMediaValue'
 
-const test: IMediaValue[] = [
-    {
-        windowWidth: {
-            min: 950,
-            max: 1000
-        },
-        value: 150
-    },
-    {
-        windowWidth: {
-            min: 1001,
-            max: 1050
-        },
-        value: 150
-    },
-    {
-        windowWidth: {
-            min: 1051,
-            max: 1100
-        },
-        value: 150
-    }
-]
-
 const checkWidthsGaps = (mediaValues: IMediaValue[]): boolean => {
     let hasWidthsGaps = false
 

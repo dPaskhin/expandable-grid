@@ -63,7 +63,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
         }
 
         return rowGap
-    }, [windowWidth, rowGap])
+    }, [windowWidth, rowGap, adaptive?.rowGaps])
 
     const _columnGap: number | null = useMemo(() => {
         if (adaptive?.columnGaps?.length) {
@@ -71,7 +71,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
         }
 
         return columnGap
-    }, [windowWidth, columnGap])
+    }, [windowWidth, columnGap, adaptive?.columnGaps])
 
     const diffHeight = expandedItemHeight - _itemHeight
     const [_expandedItem, setExpandedItem] = useState(expandedItem)

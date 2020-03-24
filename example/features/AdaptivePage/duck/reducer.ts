@@ -5,10 +5,13 @@ import { IMediaValue } from '@common/interfaces/IMediaValue'
 
 import { IAdaptiveSettings } from '@features/AdaptivePage/interfaces/IAdaptiveSettings'
 import { Creators, Types } from '@features/AdaptivePage/duck/actions'
+import { AdaptiveValueTypes } from '@features/AdaptivePage/enums/AdaptiveValueTypes'
 
 export const initState: IAdaptiveSettings = {
-    heights: [],
-    columns: [],
+    [AdaptiveValueTypes.HEIGHTS]: [],
+    [AdaptiveValueTypes.COLUMNS]: [],
+    [AdaptiveValueTypes.ROW_GAPS]: [],
+    [AdaptiveValueTypes.COLUMN_GAPS]: [],
 }
 
 type ActionsType = ReturnType<InferValueTypes<typeof Creators>>

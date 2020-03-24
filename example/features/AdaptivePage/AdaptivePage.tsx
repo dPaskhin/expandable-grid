@@ -18,7 +18,7 @@ const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
     deleteItem
 }) => {
     const [expandedItem, setExpandedItem] = useState<number | null>(null)
-    const [panelOpen, setPanelOpen] = useState(false)
+    const [panelOpen, setPanelOpen] = useState(true)
     const items = useMemo(() => getItems(), [])
 
     return (
@@ -26,6 +26,7 @@ const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
             <ExpandableGrid
                 expandedItem={expandedItem}
                 adaptive={settings}
+                afterColumnsCountChanged={() => setExpandedItem(null)}
             >
                 {items.map((item, index) => (
                     <ExampleItem

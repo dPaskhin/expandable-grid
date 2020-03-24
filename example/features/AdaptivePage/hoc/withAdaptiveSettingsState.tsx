@@ -26,6 +26,8 @@ export const withAdaptiveSettingsState = <P extends {}>(Component: React.FC<P & 
         const mutableSettings: Mutable<typeof settings> = {
             [AdaptiveValueTypes.HEIGHTS]: [...settings[AdaptiveValueTypes.HEIGHTS]],
             [AdaptiveValueTypes.COLUMNS]: [...settings[AdaptiveValueTypes.COLUMNS]],
+            [AdaptiveValueTypes.ROW_GAPS]: [...settings[AdaptiveValueTypes.ROW_GAPS]],
+            [AdaptiveValueTypes.COLUMN_GAPS]: [...settings[AdaptiveValueTypes.COLUMN_GAPS]],
         }
 
         return (

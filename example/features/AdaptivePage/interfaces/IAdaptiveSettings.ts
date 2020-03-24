@@ -1,6 +1,6 @@
 import { IMediaValue } from '@common/interfaces/IMediaValue'
+import { AdaptiveValueTypes } from '@features/AdaptivePage/enums/AdaptiveValueTypes'
 
-export interface IAdaptiveSettings {
-    heights: IMediaValue[]
-    columns: IMediaValue[]
+export type IAdaptiveSettings = {
+    [K in AdaptiveValueTypes]: IMediaValue[]
 }
