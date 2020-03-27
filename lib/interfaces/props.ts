@@ -1,23 +1,17 @@
 import React from 'react'
 
-import { IMediaValue } from './interfaces'
+import { DimensionsTypes } from '@lib/enums/DimensionsTypes'
+import { IMediaValue } from '@lib/interfaces/interfaces'
+import { IDimensions } from '@lib/interfaces/IDimensions'
+import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions'
 
 export interface IProps {
     children: React.ReactNode[] | React.ReactNode
     expandedItem?: number | null
-    itemHeight?: number
-    expandedItemHeight?: number
-    columnsCount?: number
-    rowGap?: number | null
-    columnGap?: number | null
     transitionDuration?: number | null
     gridClassName?: string
     gridItemClassName?: string
-    adaptive?: {
-        heights?: IMediaValue[]
-        columns?: IMediaValue[]
-        rowGaps?: IMediaValue[]
-        columnGaps?: IMediaValue[]
-    } | null
+    dimensions?: Partial<IDimensions>
+    adaptiveDimensions?: IAdaptiveDimensions
     afterColumnsCountChanged?: ((columnsCount: number) => void) | null
 }

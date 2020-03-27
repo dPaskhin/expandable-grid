@@ -1,83 +1,44 @@
-import React, {
-    useEffect,
-    useMemo,
-    useState
-} from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-import './style/expandable.css'
+import '@lib/style/expandable.css'
 
-import { IItem } from './interfaces/interfaces'
-import { IProps } from './interfaces/props'
+import { IDimensions } from '@lib/interfaces/IDimensions'
+import { IProps } from '@lib/interfaces/props'
+import { IItem } from '@lib/interfaces/interfaces'
+import { modifyItems } from '@lib/utils/modifierItems'
+import { getChildrenItem, getInitialItems, getPosition } from '@lib/utils/functions'
+import { getGridHeight, getGridItemPadding, getGridMargins } from '@lib/utils/gridHandlers'
 
-import {
-    getChildrenItem,
-    getGridItemPadding,
-    getGridMargins,
-    getInitialItems,
-    getPosition
-} from './utils/functions'
-import { modifyItems } from './utils/modifierItems'
-import { useWindowResizeEffect } from './hooks/useWindowResizeEffect'
-import { getAdaptiveValue } from './utils/getAdaptiveValue'
+import { useWindowResizeEffect } from '@lib/hooks/useWindowResizeEffect'
+import { getDimensions } from '@lib/utils/getDimensions'
 
 
 export const ExpandableGrid: React.FC<IProps> = ({
     children,
-    expandedItem = null,
-    itemHeight = 150,
-    expandedItemHeight = 350,
-    columnsCount = 3,
-    rowGap = null,
-    columnGap = null,
+    expandedItem: exExpandedItem = null,
+    dimensions: exDimensions,
     transitionDuration = null,
     gridClassName = '',
     gridItemClassName = '',
-    adaptive = null,
-    afterColumnsCountChanged = null
+    adaptiveDimensions,
+    afterColumnsCountChanged = null,
 }) => {
     const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
-
-    const _itemHeight: number = useMemo(() => {
-        if (adaptive?.heights?.length) {
-            return getAdaptiveValue(windowWidth, adaptive.heights)
-        }
-
-        return itemHeight
-    }, [windowWidth, itemHeight, adaptive?.heights])
-
-    const _columnsCount: number = useMemo(() => {
-        if (adaptive?.columns?.length) {
-            return getAdaptiveValue(windowWidth, adaptive.columns)
-        }
-
-        if (columnsCount <= 0) {
-            return 1
-        }
-
-        return columnsCount
-    }, [windowWidth, columnsCount, adaptive?.columns])
-
-    const _rowGap: number | null = useMemo(() => {
-        if (adaptive?.rowGaps?.length) {
-            return getAdaptiveValue(windowWidth, adaptive.rowGaps)
-        }
-
-        return rowGap
-    }, [windowWidth, rowGap, adaptive?.rowGaps])
-
-    const _columnGap: number | null = useMemo(() => {
-        if (adaptive?.columnGaps?.length) {
-            return getAdaptiveValue(windowWidth, adaptive.columnGaps)
-        }
-
-        return columnGap
-    }, [windowWidth, columnGap, adaptive?.columnGaps])
-
-    const diffHeight = expandedItemHeight - _itemHeight
-    const [_expandedItem, setExpandedItem] = useState(expandedItem)
+    const dimensions: IDimensions = useMemo(() => (
+        getDimensions(windowWidth, adaptiveDimensions)
+    ), [windowWidth, adaptiveDimensions, exDimensions])
+    const {
+        itemHeight,
+        columnsCount,
+        rowGap,
+        columnGap,
+        expandedHeight,
+    } = dimensions
+    const diffHeight = expandedHeight - itemHeight
+    const [expandedItem, setExpandedItem] = useState(exExpandedItem)
 
     useWindowResizeEffect(() => {
-        if (!adaptive) {
+        if (!adaptiveDimensions) {
             return
         }
         setWindowWidth(window.innerWidth)
@@ -86,78 +47,77 @@ export const ExpandableGrid: React.FC<IProps> = ({
     useEffect(() => {
         setExpandedItem(item => {
             if (item === null) {
-                return expandedItem
+                return exExpandedItem
             }
 
-            if (expandedItem === null) {
+            if (exExpandedItem === null) {
                 return null
             }
 
-            setTimeout(() => setExpandedItem(expandedItem), 0)
+            setTimeout(() => setExpandedItem(exExpandedItem), 0)
 
             return null
         })
-    }, [expandedItem])
+    }, [exExpandedItem])
 
     useEffect(() => {
-        if (_expandedItem === null) {
+        if (expandedItem === null) {
             setItems(initialItems)
             return
         }
 
-        setItems(items => modifyItems(items, _expandedItem, _columnsCount))
-    }, [_expandedItem, _columnsCount])
+        setItems(items => modifyItems(items, expandedItem, columnsCount))
+    }, [expandedItem, columnsCount])
 
     useEffect(() => {
         if (afterColumnsCountChanged !== null) {
-            afterColumnsCountChanged(_columnsCount)
+            afterColumnsCountChanged(columnsCount)
         }
-    }, [_columnsCount])
+    }, [columnsCount])
 
     useEffect(() => {
         setExpandedItem(null)
-    }, [_columnsCount])
+    }, [columnsCount])
 
     const initialItems: IItem[] = useMemo(() => {
         if (!children || (children instanceof Array && children.length === 0)) {
             throw Error('You should pass children items')
         }
 
-        return getInitialItems(children, _columnsCount)
-    }, [children, _columnsCount])
+        return getInitialItems(children, columnsCount)
+    }, [children, columnsCount])
 
     const [items, setItems] = useState<IItem[]>(initialItems)
 
-    const gridHeight = useMemo(() => {
-        const needAdditionalRow = _expandedItem !== null && items.length % _columnsCount !== 1 && _columnsCount !== 1
-        const rowsCount = Math.ceil(items.length / _columnsCount) + (needAdditionalRow ? 1 : 0)
-
-        if (_expandedItem !== null) {
-            return rowsCount * _itemHeight + diffHeight
-        }
-
-        return rowsCount * _itemHeight
-    }, [_itemHeight, _expandedItem, _columnsCount])
+    const gridHeight = useMemo(() => (
+        getGridHeight({
+            itemsCount: items.length,
+            itemHeight,
+            expandedItem,
+            diffHeight,
+            columnsCount,
+        })
+    ), [itemHeight, expandedItem, columnsCount])
 
     return (
         <div
             className={`_expandable-grid ${gridClassName}`}
             style={{
-                ...getGridMargins(_rowGap, _columnGap),
+                ...getGridMargins(rowGap, columnGap),
                 height: gridHeight,
-                transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
+                transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined,
             }}
         >
             {items.map((item, index) => (
                 <div key={index}
                      className={
-                         `_expandable-grid__item ${expandedItem === index ? '_expandable-grid__item--expanded' : ''} ${gridItemClassName}`
+                         `_expandable-grid__item ${exExpandedItem === index ? '_expandable-grid__item--expanded' : ''} ${gridItemClassName}`
                      }
                      style={{
-                         ...getPosition(items[index], _itemHeight, diffHeight, _columnsCount),
-                         ...getGridItemPadding(_rowGap, _columnGap),
-                         height: index === _expandedItem ? expandedItemHeight : _itemHeight,
-                         transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined
+                         ...getPosition(items[index], itemHeight, diffHeight, columnsCount),
+                         ...getGridItemPadding(rowGap, columnGap),
+                         height: index === expandedItem ? expandedHeight : itemHeight,
+                         transitionDuration: transitionDuration !== null ? `${transitionDuration}ms` : undefined,
                      }}
                 >
                     {getChildrenItem(children, index)}
