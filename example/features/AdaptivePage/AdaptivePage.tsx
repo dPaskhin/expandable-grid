@@ -15,7 +15,7 @@ import {
 const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
     settings,
     setValue,
-    deleteItem
+    deleteItem,
 }) => {
     const [expandedItem, setExpandedItem] = useState<number | null>(null)
     const [panelOpen, setPanelOpen] = useState(true)

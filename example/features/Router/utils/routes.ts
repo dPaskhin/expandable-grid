@@ -8,12 +8,12 @@ export const routes: Route[] = [
         path: RoutesPaths.INDEX,
         exact: true,
         component: IndexPage,
-        title: 'Default'
+        title: 'Default',
     },
     {
         path: RoutesPaths.ADAPTIVE,
         exact: true,
         component: AdaptivePage,
-        title: 'Adaptive'
-    }
+        title: 'Adaptive',
+    },
 ]
