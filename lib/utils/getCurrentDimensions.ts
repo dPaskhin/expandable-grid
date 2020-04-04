@@ -4,12 +4,11 @@ import { IDimensions } from '@lib/interfaces/IDimensions'
 import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions'
 import { DimensionsTypes } from '@lib/enums/DimensionsTypes'
 
-export const getDimensions = (windowWidth: number, adaptiveDimensions?: IAdaptiveDimensions): IDimensions => {
-    if (!adaptiveDimensions) {
-        return initialDimensions
-    }
-
-    return Object
+export const getCurrentDimensions = (
+    adaptiveDimensions: IAdaptiveDimensions,
+    windowWidth: number,
+): IDimensions => (
+    Object
         .keys(adaptiveDimensions)
         .reduce<IDimensions>((dimensions, dimension) => {
             const adaptiveValues = adaptiveDimensions[dimension as DimensionsTypes]
@@ -23,4 +22,4 @@ export const getDimensions = (windowWidth: number, adaptiveDimensions?: IAdaptiv
 
             return dimensions
         }, initialDimensions)
-}
+)

@@ -6,11 +6,11 @@ export const getAdaptiveValue = (windowWidth: number, values: IMediaValue[]) => 
     const maxValue = sortedValues[sortedValues.length - 1]
     const minValue = sortedValues[0]
 
-    const currentValue = values.filter(value => {
-        return windowWidth >= value.windowWidth.min && windowWidth <= value.windowWidth.max
-    })[0]
+    const currentValue = values.filter(value => (
+        windowWidth >= value.windowWidth.min && windowWidth <= value.windowWidth.max
+    ))[0]
 
-    if (typeof currentValue !== 'undefined') {
+    if (currentValue) {
         return currentValue.value
     }
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { debounce } from '../utils/debounce'
 
 export const useWindowResizeEffect = <T>(onResize: () => void, deps: T[] = [], debounceTime = 100) => {
