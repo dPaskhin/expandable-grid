@@ -6,19 +6,21 @@ export const useExpandedItem = (
   const [expandedItem, setExpandedItem] = useState(externalExpandedItem);
 
   useEffect(() => {
-    setExpandedItem(item => {
-      if (item === null) {
-        return externalExpandedItem;
-      }
+    if (expandedItem === null) {
+      setExpandedItem(externalExpandedItem);
 
-      if (externalExpandedItem === null) {
-        return null;
-      }
+      return;
+    }
 
-      setTimeout(() => setExpandedItem(externalExpandedItem), 0);
+    if (externalExpandedItem === null) {
+      setExpandedItem(null);
 
-      return null;
-    });
+      return;
+    }
+
+    Promise
+      .resolve(setExpandedItem(null))
+      .then(() => setExpandedItem(externalExpandedItem));
   }, [externalExpandedItem]);
 
   return [expandedItem, setExpandedItem];

@@ -7,7 +7,7 @@ import { initialDimensions } from '@lib/utils/initialDimensions';
 
 export const useDimensions = (
   windowWidth: number,
-  dimensions?: Partial<IDimensions>,
+  dimensions?: IDimensions,
   adaptiveDimensions?: IAdaptiveDimensions,
 ): Required<IDimensions> => useMemo(() => {
   if (!adaptiveDimensions) {

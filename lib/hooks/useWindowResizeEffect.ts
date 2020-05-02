@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 
-import { debounce } from '@lib/utils/debounce';
+import { useDebounce } from '@lib/hooks/useDebounce';
 
-export const useWindowResizeEffect = <T>(onResize: () => void, deps: T[] = [], debounceTime = 100) => {
+export const useWindowResizeEffect = <T>(
+  onResize: () => void,
+  deps: T[] = [],
+) => {
+  const resizeHandler = useDebounce({ func: onResize });
+
   useEffect(() => {
-    const resizeHandler = debounce(onResize, debounceTime);
-
     window.addEventListener('resize', resizeHandler);
 
     return () => window.removeEventListener('resize', resizeHandler);
-  }, [onResize, debounceTime, ...deps]);
+  }, [onResize, ...deps]);
 };

@@ -1,31 +1,31 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import '@lib/style/expandable.css';
 
 import { IProps } from '@lib/interfaces/IProps';
-
-import { getChildrenItem, getPosition } from '@lib/utils/functions';
-import { getGridItemPadding, getGridMargins } from '@lib/utils/gridHandlers';
-
+import { GridClassnames } from '@lib/enums/GridClassnames';
+import { getChildrenItem } from '@lib/utils/getChildrenItem';
+import { getGridItemClass } from '@lib/utils/getGridItemClass';
+import { isChildrenPassed } from '@lib/utils/isChildrenPassed';
 import { useDimensions } from '@lib/hooks/useDimensions';
 import { useWindowWidth } from '@lib/hooks/useWindowWidth';
 import { useExpandedItem } from '@lib/hooks/useExpandedItem';
 import { useGridItems } from '@lib/hooks/useGridItems';
 import { useGridHeight } from '@lib/hooks/useGridHeght';
-import { IItem } from '@lib/interfaces/IItem';
-import { GridClassnames } from '@lib/enums/GridClassnames';
+import { useGridStyles } from '@lib/hooks/useGridStyles';
+import { useGridItemStylesGetter } from '@lib/hooks/useGridItemStylesGetter';
 
 export const ExpandableGrid: React.FC<IProps> = ({
   children,
   expandedItem: exExpandedItem = null,
   dimensions: exDimensions,
+  adaptiveDimensions,
   transitionDuration = 200,
   gridClassName = '',
   gridItemClassName = '',
-  adaptiveDimensions,
   afterColumnsCountChanged,
 }) => {
-  if (!children || (Array.isArray(children) && !children.length)) {
+  if (!isChildrenPassed(children)) {
     throw Error('You should pass children items');
   }
 
@@ -36,10 +36,10 @@ export const ExpandableGrid: React.FC<IProps> = ({
     columnsCount,
     rowGap,
     columnGap,
-    expandedHeight,
+    expandedItemHeight,
   } = useDimensions(windowWidth, exDimensions, adaptiveDimensions);
 
-  const diffHeight = expandedHeight - itemHeight;
+  const diffHeight = expandedItemHeight - itemHeight;
 
   const [expandedItem, setExpandedItem] = useExpandedItem(exExpandedItem);
 
@@ -64,37 +64,35 @@ export const ExpandableGrid: React.FC<IProps> = ({
     expandedItem,
   });
 
-  const gridStyles = useMemo(() => ({
-    ...getGridMargins(rowGap, columnGap),
-    height: gridHeight,
-    transitionDuration: `${transitionDuration}ms`,
-  }), [rowGap, columnGap, gridHeight]);
+  const gridStyles = useGridStyles({
+    rowGap,
+    columnGap,
+    transitionDuration,
+    gridHeight,
+  });
 
-  const getGridItemStyles = useCallback((item: IItem, isExpandedItem?: boolean) => ({
-    ...getPosition({ item, itemHeight, diffHeight, columnsCount }),
-    ...getGridItemPadding(rowGap, columnGap),
-    height: isExpandedItem ? expandedHeight : itemHeight,
-    transitionDuration: `${transitionDuration}ms`,
-  }), [diffHeight, rowGap, columnGap]);
-
-  const gridClass = `${GridClassnames.GRID_CLASSNAME} ${gridClassName}`;
-
-  const getGridItemClass = useCallback((isExpanded: boolean) => (
-    `
-      ${GridClassnames.GRID_ITEM_CLASSNAME} 
-      ${isExpanded ? GridClassnames.GRID_ITEM_EXPANDED_CLASSNAME : ''} ${gridItemClassName}
-    `
-  ), []);
+  const getGridItemStyles = useGridItemStylesGetter({
+    transitionDuration,
+    columnsCount,
+    itemHeight,
+    diffHeight,
+    rowGap,
+    columnGap,
+    expandedItemHeight,
+  });
 
   return (
     <div
-      className={gridClass}
+      className={`${GridClassnames.GRID_CLASSNAME} ${gridClassName}`}
       style={gridStyles}
     >
       {items.map((item, index) => (
         <div
           key={index}
-          className={getGridItemClass(exExpandedItem === index)}
+          className={getGridItemClass({
+            isExpanded: exExpandedItem === index,
+            extraClass: gridItemClassName,
+          })}
           style={getGridItemStyles(item, index === exExpandedItem)}
         >
           {getChildrenItem(children, index)}

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { modifyItems } from '@lib/utils/modifierItems';
 import { IItem } from '@lib/interfaces/IItem';
-import { getInitialItems } from '@lib/utils/functions';
+import { getInitialItems } from '@lib/utils/getInitialItems';
 
 interface IParams {
   itemsCount: number;
@@ -15,15 +15,11 @@ export const useGridItems = ({
   columnsCount,
   expandedItem,
 }: IParams): IItem[] => {
-  const initialItems: IItem[] = useMemo(() => {
-    if (!itemsCount) {
-      throw Error('You should pass children items');
-    }
+  const initialItems = useMemo(() => (
+    getInitialItems(itemsCount, columnsCount)
+  ), [itemsCount, columnsCount]);
 
-    return getInitialItems(itemsCount, columnsCount);
-  }, [itemsCount]);
-
-  const [items, setItems] = useState<IItem[]>(initialItems);
+  const [items, setItems] = useState(initialItems);
 
   useEffect(() => {
     if (expandedItem === null) {

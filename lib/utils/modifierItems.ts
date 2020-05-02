@@ -1,6 +1,6 @@
 import { IItem } from '@lib/interfaces/IItem';
-import { getItemX, getItemY } from '@lib/utils/functions';
 import { initialItem } from '@lib/utils/initialItem';
+import { getItemX, getItemY } from '@lib/utils/getItemCoord';
 
 type modifyItemsType = (
   items: IItem[],
@@ -13,8 +13,8 @@ export const modifyItems: modifyItemsType = (
   expandedItem,
   columnsCount,
 ) => {
-  const expandedItemX = getItemX(expandedItem, columnsCount);
-  const expandedItemY = getItemY(expandedItem, columnsCount);
+  const expandedItemX = getItemX({ itemId: expandedItem, columnsCount });
+  const expandedItemY = getItemY({ itemId: expandedItem, columnsCount });
 
   for (let i = 0; i <= columnsCount; i++) {
     if (expandedItemX !== i) {

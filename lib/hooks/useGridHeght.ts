@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { getGridHeight } from '@lib/utils/gridHandlers';
+import { getGridHeight } from '@lib/utils/getGridHeight';
 
 interface IParams {
   itemsCount: number;
@@ -16,7 +16,7 @@ export const useGridHeight = ({
   itemsCount,
   diffHeight,
   itemHeight,
-}: IParams): number => useMemo(() => (
+}: IParams) => useMemo(() => (
   getGridHeight({
     itemsCount,
     itemHeight,

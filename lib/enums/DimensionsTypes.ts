@@ -3,5 +3,5 @@ export enum DimensionsTypes {
   COLUMNS_COUNT = 'columnsCount',
   ROW_GAP = 'rowGap',
   COLUMN_GAP = 'columnGap',
-  EXPANDED_HEIGHT = 'expandedHeight',
+  EXPANDED_ITEM_HEIGHT = 'expandedItemHeight',
 }
