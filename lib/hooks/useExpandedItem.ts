@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export const useExpandedItem = (
-    externalExpandedItem: number | null
+  externalExpandedItem: number | null,
 ): [number | null, (expandedItem: number | null) => void] => {
-    const [expandedItem, setExpandedItem] = useState(externalExpandedItem)
+  const [expandedItem, setExpandedItem] = useState(externalExpandedItem);
 
-    useEffect(() => {
-        setExpandedItem(item => {
-            if (item === null) {
-                return externalExpandedItem
-            }
+  useEffect(() => {
+    setExpandedItem(item => {
+      if (item === null) {
+        return externalExpandedItem;
+      }
 
-            if (externalExpandedItem === null) {
-                return null
-            }
+      if (externalExpandedItem === null) {
+        return null;
+      }
 
-            setTimeout(() => setExpandedItem(externalExpandedItem), 0)
+      setTimeout(() => setExpandedItem(externalExpandedItem), 0);
 
-            return null
-        })
-    }, [externalExpandedItem])
+      return null;
+    });
+  }, [externalExpandedItem]);
 
-    return [expandedItem, setExpandedItem]
-}
+  return [expandedItem, setExpandedItem];
+};

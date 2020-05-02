@@ -1,6 +1,6 @@
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes'
-import { IMediaValue } from '@lib/interfaces/interfaces'
+import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { IMediaValue } from '@lib/interfaces/IMediaValue';
 
 export type IAdaptiveDimensions = {
-    [K in DimensionsTypes]?: IMediaValue[]
+  [K in DimensionsTypes]?: IMediaValue[];
 }

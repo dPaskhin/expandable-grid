@@ -1,0 +1,140 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": ["off"]
+  },
+  "overrides": [{
+    "files": ["*.ts", "*.tsx"],
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "tsconfigRootDir": "."
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      },
+      "import/ignore": ["node_modules"],
+      "import/resolver": {
+        "typescript": {}
+      },
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"]
+      }
+    },
+    "extends": [
+      "eslint:recommended",
+      "google",
+      "plugin:react/recommended",
+      "plugin:sonarjs/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "react-hooks",
+      "sonarjs",
+      "prefer-arrow",
+      "import"
+    ],
+    "rules": {
+      "import/order": ["error", {
+        "groups": [["external"], ["index", "builtin", "sibling", "internal", "parent"]],
+        "newlines-between": "always-and-inside-groups"
+      }],
+      "import/named": "off",
+      "import/no-unresolved": ["error", {
+        "ignore": ["^!!raw-loader!.*$"]
+      }],
+      "import/first": ["error"],
+      "@typescript-eslint/interface-name-prefix": ["error", "always"],
+      "object-curly-spacing": ["error", "always"],
+      "indent": ["error", 2],
+      "newline-after-var": ["error", "always"],
+      "newline-before-return": "error",
+      "no-console": "error",
+      "arrow-parens": ["error", "as-needed"],
+      "require-jsdoc": "off",
+      "react/prefer-stateless-function": "error",
+      "prefer-arrow/prefer-arrow-functions": ["error", {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }],
+      "@typescript-eslint/explicit-function-return-type": ["off"],
+      "arrow-body-style": ["error", "as-needed"],
+      "no-multiple-empty-lines": ["error", {
+        "max": 1,
+        "maxEOF": 1
+      }],
+      "react/prop-types": 0,
+      "react/display-name": ["off"],
+      "max-len": ["error", {
+        "code": 120
+      }],
+      "operator-linebreak": ["error", "before"],
+      "comma-dangle": ["error", "always-multiline"],
+      "jsx-quotes": ["error", "prefer-single"],
+      "react/jsx-curly-brace-presence": ["error", {
+        "props": "never",
+        "children": "never"
+      }],
+      "react/jsx-boolean-value": ["error", "always"],
+      "react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
+      "react/jsx-max-props-per-line": ["error", { "maximum": 1 }],
+      "react/jsx-closing-tag-location": ["error"],
+      "react/jsx-tag-spacing": ["error", {
+        "closingSlash": "never",
+        "beforeSelfClosing": "never",
+        "afterOpening": "never",
+        "beforeClosing": "never"
+      }],
+      "react/jsx-wrap-multilines": ["error", {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "parens-new-line",
+        "prop": "parens-new-line"
+      }],
+      "react/jsx-fragments": ["error", "syntax"],
+      "react-hooks/exhaustive-deps": ["off"],
+      "sonarjs/no-small-switch": ["off"],
+      "sonarjs/no-duplicate-string": ["off"],
+      "no-param-reassign": "error",
+      "@typescript-eslint/array-type": ["error", {
+        "default": "array-simple",
+        "readonly": "array-simple"
+      }],
+      "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }]
+    }
+  }]
+}
