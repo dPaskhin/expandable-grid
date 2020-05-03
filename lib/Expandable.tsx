@@ -25,10 +25,6 @@ export const ExpandableGrid: React.FC<IProps> = ({
   gridItemClassName = '',
   afterColumnsCountChanged,
 }) => {
-  if (!isChildrenPassed(children)) {
-    throw Error('You should pass children items');
-  }
-
   const windowWidth = useWindowWidth(!!adaptiveDimensions);
 
   const {
@@ -80,6 +76,10 @@ export const ExpandableGrid: React.FC<IProps> = ({
     columnGap,
     expandedItemHeight,
   });
+
+  if (!isChildrenPassed(children)) {
+    return null;
+  }
 
   return (
     <div

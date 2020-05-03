@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { modifyItems } from '@lib/utils/modifierItems';
+import { modifyItems } from '@lib/utils/modyItems';
 import { IItem } from '@lib/interfaces/IItem';
 import { getInitialItems } from '@lib/utils/getInitialItems';
 
