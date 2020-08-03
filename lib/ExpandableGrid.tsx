@@ -84,10 +84,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
             onExpand: expandedItem !== index
               ? () => setExpandedItem(index)
               : undefined,
-            onClose: event => {
-              event.stopPropagation();
-              setExpandedItem(null);
-            },
+            onClose: () => setExpandedItem(null),
           })}
         </div>
       ))}

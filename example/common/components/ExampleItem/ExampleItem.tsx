@@ -7,7 +7,7 @@ import { useClasses } from '@common/components/ExampleItem/hooks/useClasses';
 
 interface IProps {
   isExpanded: boolean;
-  onClose: (event: React.MouseEvent) => void;
+  onClose: () => void;
 }
 
 export const ExampleItem: React.FC<IProps & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({

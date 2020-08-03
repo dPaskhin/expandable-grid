@@ -1,12 +1,10 @@
-import React from 'react';
-
 import { IDimensions } from '@lib/interfaces/IDimensions';
 import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions';
 
 export interface IInjectedProps {
   isExpanded: boolean;
   onExpand?: () => void;
-  onClose: (event: React.MouseEvent) => void;
+  onClose: () => void;
 }
 
 export interface IProps {
