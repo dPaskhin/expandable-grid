@@ -1,5 +1,5 @@
 import { IItem } from '@lib/interfaces/IItem';
-import { getItemX, getItemY } from '@lib/utils/getItemCoord';
+import { getItemCoord } from '@lib/utils/getItemCoord';
 
 const getItemEqualByXCoord = (
   item: IItem,
@@ -49,9 +49,11 @@ export const modifyItems = (
   items: IItem[],
   expandedItem: number,
   columnsCount: number,
-) => {
-  const expandedItemX = getItemX({ itemId: expandedItem, columnsCount });
-  const expandedItemY = getItemY({ itemId: expandedItem, columnsCount });
+): IItem[] => {
+  const {
+    x: expandedItemX,
+    y: expandedItemY,
+  } = getItemCoord({ itemId: expandedItem, columnsCount });
 
   return items.map(item => {
     if (expandedItemY > item.coord.y) {

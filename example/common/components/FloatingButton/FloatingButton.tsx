@@ -1,22 +1,8 @@
 import React from 'react';
-import { Fab, Theme, Zoom } from '@material-ui/core';
+import { Fab, Zoom } from '@material-ui/core';
 import { Edit } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyle = makeStyles((theme: Theme) => ({
-  fab: {
-    'position': 'fixed',
-    'bottom': theme.spacing(5),
-    'right': theme.spacing(5),
-    'zIndex': 100,
-    '& svg': {
-      transition: theme.transitions.create('transform', { duration: 200 }),
-    },
-    '&:hover svg': {
-      transform: 'rotate(-10deg)',
-    },
-  },
-}));
+import { useClasses } from '@common/components/FloatingButton/hooks/useClasses';
 
 interface IProps {
   onClick: () => void;
@@ -25,7 +11,7 @@ interface IProps {
 export const FloatingButton: React.FC<IProps> = ({
   onClick,
 }) => {
-  const classes = useStyle();
+  const classes = useClasses();
 
   return (
     <Zoom in={true}>

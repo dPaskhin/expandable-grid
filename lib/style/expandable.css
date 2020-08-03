@@ -1,10 +1,8 @@
 ._expandable-grid {
-    display: flex;
     position: relative;
     margin-top: -10px;
     margin-bottom: -10px;
     width: 100%;
-    flex-wrap: wrap;
     transition: height .5s;
 }
 
@@ -13,7 +11,7 @@
     box-sizing: border-box;
     padding: 10px;
     transition-property: all;
-    transition-duration: 300ms;
+    transition-duration: .3s;
     z-index: 50;
 }
 

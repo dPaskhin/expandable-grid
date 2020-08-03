@@ -17,6 +17,7 @@ export const useGridStyles = ({
 }: IParams) => (
   useMemo(() => ({
     ...getGridMargins(rowGap, columnGap),
+    width: `calc(100% + ${columnGap}px)`,
     height: gridHeight,
     transitionDuration: `${transitionDuration}ms`,
   }), [rowGap, columnGap, gridHeight])

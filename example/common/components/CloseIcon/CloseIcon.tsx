@@ -3,13 +3,15 @@ import { CloseRounded } from '@material-ui/icons';
 
 interface IProps {
   onClick: (event: React.MouseEvent) => void;
+  className?: string;
 }
 
 export const CloseIcon: React.FC<IProps> = ({
   onClick,
+  className,
 }) => (
   <div
-    className='example-item__close'
+    className={className}
     onClick={onClick}
   >
     <CloseRounded titleAccess='Collapse item'/>

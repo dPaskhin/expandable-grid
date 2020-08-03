@@ -28,5 +28,5 @@ export const useGridItemStylesGetter = ({
     ...getGridItemPadding(rowGap, columnGap),
     height: isExpandedItem ? expandedItemHeight : itemHeight,
     transitionDuration: `${transitionDuration}ms`,
-  }), [diffHeight, rowGap, columnGap])
+  }), [diffHeight, rowGap, columnGap, columnsCount])
 );

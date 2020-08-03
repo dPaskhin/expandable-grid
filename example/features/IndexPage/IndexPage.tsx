@@ -1,25 +1,26 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
-import { ExpandableGrid } from '@lib/Expandable';
+import { ExpandableGrid } from '@lib/ExpandableGrid';
 
-import { getItems } from '@common/utils/items';
+import { getItems } from '@common/utils/getItems';
 import { ExampleItem } from '@common/components/ExampleItem/ExampleItem';
 
 export const IndexPage = () => {
-  const [expandedItem, setExpandedItem] = useState<number | null>();
   const items = useMemo(() => getItems(), []);
 
   return (
-    <ExpandableGrid expandedItem={expandedItem}>
-      {items.map((item, index) => (
-        <ExampleItem
-          key={index}
-          isExpanded={expandedItem === index}
-          onClose={() => setExpandedItem(null)}
-          onClick={() => setExpandedItem(index)}
-          style={{ backgroundColor: item }}
-        />
+    <ExpandableGrid
+      renderItems={items.map((item, index) => (
+        ({ isExpanded, onExpand, onClose }) => (
+          <ExampleItem
+            key={index}
+            isExpanded={isExpanded}
+            onClose={onClose}
+            onClick={onExpand}
+            style={{ backgroundColor: item }}
+          />
+        )
       ))}
-    </ExpandableGrid>
+    />
   );
 };

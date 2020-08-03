@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export const useExpandedItem = (
-  externalExpandedItem: number | null,
-): [number | null, (expandedItem: number | null) => void] => {
-  const [expandedItem, setExpandedItem] = useState(externalExpandedItem);
+export const useExpandedItem = (): [number | null, (item: number | null) => void] => {
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (expandedItem === null) {
-      setExpandedItem(externalExpandedItem);
+  return [
+    expandedItem,
+    async (item: number | null) => {
+      if (expandedItem === null) {
+        setExpandedItem(item);
 
-      return;
-    }
+        return;
+      }
 
-    if (externalExpandedItem === null) {
-      setExpandedItem(null);
+      if (item === null) {
+        setExpandedItem(null);
 
-      return;
-    }
+        return;
+      }
 
-    Promise
-      .resolve(setExpandedItem(null))
-      .then(() => setExpandedItem(externalExpandedItem));
-  }, [externalExpandedItem]);
-
-  return [expandedItem, setExpandedItem];
+      await setExpandedItem(null);
+      setExpandedItem(item);
+    },
+  ];
 };

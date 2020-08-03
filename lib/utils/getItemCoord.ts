@@ -5,7 +5,7 @@ interface IParams {
   columnsCount: number;
 }
 
-export const getItemX = ({
+const getItemX = ({
   itemId,
   columnsCount,
 }: IParams) => {
@@ -22,7 +22,7 @@ export const getItemX = ({
   return 0;
 };
 
-export const getItemY = ({
+const getItemY = ({
   itemId,
   columnsCount,
 }: IParams) => (

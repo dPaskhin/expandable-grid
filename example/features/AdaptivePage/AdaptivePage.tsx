@@ -1,50 +1,46 @@
 import React, { useMemo, useState } from 'react';
 
-import { ExpandableGrid } from '@lib/Expandable';
-
-import { getItems } from '@common/utils/items';
+import { ExpandableGrid } from '@lib/ExpandableGrid';
+import { getItems } from '@common/utils/getItems';
 import { ExampleItem } from '@common/components/ExampleItem/ExampleItem';
 import { FloatingButton } from '@common/components/FloatingButton/FloatingButton';
-
-import { SettingsPanel } from '@features/AdaptivePage/components/SettingsPanel';
+import { SettingsPanel } from '@features/AdaptivePage/components/SettingsPanel/SettingsPanel';
 import {
   IWithAdaptiveSettingsState,
   withAdaptiveSettingsState,
 } from '@features/AdaptivePage/hoc/withAdaptiveSettingsState';
 
 const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
-  settings,
-  setValue,
-  deleteItem,
+  adaptiveDimensions,
+  setAdaptiveValue,
+  deleteAdaptiveValue,
 }) => {
-  const [expandedItem, setExpandedItem] = useState<number | null>(null);
-  const [panelOpen, setPanelOpen] = useState(true);
+  const [panelOpen, setPanelOpen] = useState(false);
   const items = useMemo(() => getItems(), []);
 
   return (
     <>
       <ExpandableGrid
-        expandedItem={expandedItem}
-        adaptive={settings}
-        afterColumnsCountChanged={() => setExpandedItem(null)}
-      >
-        {items.map((item, index) => (
-          <ExampleItem
-            key={index}
-            isExpanded={expandedItem === index}
-            onClick={() => setExpandedItem(index)}
-            onClose={() => setExpandedItem(null)}
-            style={{ backgroundColor: item }}
-          />
+        adaptiveDimensions={adaptiveDimensions}
+        renderItems={items.map((item, index) => (
+          ({ isExpanded, onClose, onExpand }) => (
+            <ExampleItem
+              key={index}
+              isExpanded={isExpanded}
+              onClick={onExpand}
+              onClose={onClose}
+              style={{ backgroundColor: item }}
+            />
+          )
         ))}
-      </ExpandableGrid>
+      />
 
       <SettingsPanel
         open={panelOpen}
         onClose={() => setPanelOpen(false)}
-        settings={settings}
-        setValue={setValue}
-        deleteItem={deleteItem}
+        adaptiveDimensions={adaptiveDimensions}
+        setAdaptiveValue={setAdaptiveValue}
+        deleteAdaptiveValue={deleteAdaptiveValue}
       />
 
       <FloatingButton onClick={() => setPanelOpen(true)}/>

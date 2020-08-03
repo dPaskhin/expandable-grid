@@ -1,4 +1,4 @@
-interface IGetGridHeight {
+interface IParams {
   expandedItem: number | null;
   itemsCount: number;
   columnsCount: number;
@@ -12,7 +12,7 @@ export const getGridHeight = ({
   columnsCount,
   itemHeight,
   diffHeight,
-}: IGetGridHeight) => {
+}: IParams) => {
   const needAdditionalRow = expandedItem
     && itemsCount % columnsCount !== 1
     && columnsCount > 1;

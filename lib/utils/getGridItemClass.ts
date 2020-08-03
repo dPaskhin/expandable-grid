@@ -8,9 +8,8 @@ interface IParams {
 export const getGridItemClass = ({
   isExpanded,
   extraClass,
-}: IParams) => (
-  `
-    ${GridClassnames.GRID_ITEM_CLASSNAME} 
-    ${isExpanded ? GridClassnames.GRID_ITEM_EXPANDED_CLASSNAME : ''} ${extraClass || ''}
-  `
-);
+}: IParams) => {
+  const expandedItemClass = isExpanded ? GridClassnames.GRID_ITEM_EXPANDED_CLASSNAME : '';
+
+  return `${GridClassnames.GRID_ITEM_CLASSNAME} ${expandedItemClass} ${extraClass || ''}`;
+};

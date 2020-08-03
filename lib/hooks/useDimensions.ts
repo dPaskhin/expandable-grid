@@ -15,7 +15,9 @@ export const useDimensions = (
       ? {
         ...initialDimensions,
         ...dimensions,
-      } : initialDimensions;
+      } : {
+        ...initialDimensions,
+      };
   }
 
   const currentDimensions = getCurrentDimensions(adaptiveDimensions, windowWidth);

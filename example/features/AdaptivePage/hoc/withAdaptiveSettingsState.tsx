@@ -1,40 +1,34 @@
-import React, { useReducer } from 'react';
+import { Dispatch } from 'redux';
+import { connect, InferableComponentEnhancer } from 'react-redux';
 
-import { IMediaValue } from '@common/interfaces/IMediaValue';
-import { Mutable } from '@common/interfaces/Mutable';
+import { actions } from '@features/AdaptivePage/duck/slice';
+import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { IRootState } from '@example/app/initStore';
+import { IMediaValue } from '@features/AdaptivePage/interfaces/IMediaValue';
+import { adaptiveDimensionsSelector } from '@features/AdaptivePage/duck/selectors';
 
-import { IAdaptiveSettings } from '@features/AdaptivePage/interfaces/IAdaptiveSettings';
-import { AdaptiveValueTypes } from '@features/AdaptivePage/enums/AdaptiveValueTypes';
-import { initState, reducer } from '@features/AdaptivePage/duck/reducer';
-import { Creators } from '@features/AdaptivePage/duck/actions';
+const mapStateToProps = (state: IRootState) => ({
+  adaptiveDimensions: adaptiveDimensionsSelector(state),
+});
 
-export interface IStateProps {
-  settings: IAdaptiveSettings;
-}
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setAdaptiveValue: (dimensionType: DimensionsTypes, mediaValue: IMediaValue) => (
+    dispatch(actions.setValue({ dimensionType, mediaValue }))
+  ),
+  deleteAdaptiveValue: (dimensionType: DimensionsTypes, valueId: number) => (
+    dispatch(actions.deleteValue({ dimensionType, valueId }))
+  ),
+});
 
-export interface IDispatchProps {
-  setValue: <T extends AdaptiveValueTypes>(name: T, value: IMediaValue) => void;
-  deleteItem: <T extends AdaptiveValueTypes>(name: T, id: number) => void;
-}
+export type IStateProps = ReturnType<typeof mapStateToProps>;
 
-export type IWithAdaptiveSettingsState = IStateProps & IDispatchProps
+export type IDispatchProps = ReturnType<typeof mapDispatchToProps>;
 
-export const withAdaptiveSettingsState = <P extends {}>(Component: React.FC<P & IWithAdaptiveSettingsState>) => (props: P) => {
-  const [settings, dispatch] = useReducer(reducer, initState);
+export type IWithAdaptiveSettingsState = IStateProps & IDispatchProps;
 
-  const mutableSettings: Mutable<typeof settings> = {
-    [AdaptiveValueTypes.HEIGHTS]: [...settings[AdaptiveValueTypes.HEIGHTS]],
-    [AdaptiveValueTypes.COLUMNS]: [...settings[AdaptiveValueTypes.COLUMNS]],
-    [AdaptiveValueTypes.ROW_GAPS]: [...settings[AdaptiveValueTypes.ROW_GAPS]],
-    [AdaptiveValueTypes.COLUMN_GAPS]: [...settings[AdaptiveValueTypes.COLUMN_GAPS]],
-  };
-
-  return (
-    <Component
-      {...props}
-      settings={mutableSettings}
-      setValue={(name, value) => dispatch(Creators.setValue(name, value))}
-      deleteItem={((name, id) => dispatch(Creators.deleteValue(name, id)))}
-    />
-  );
-};
+export const withAdaptiveSettingsState: InferableComponentEnhancer<IWithAdaptiveSettingsState> = component => (
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(component)
+);

@@ -14,9 +14,7 @@ export const getItemPosition = ({
   diffHeight,
   columnsCount,
 }: IParams): IItemPosition => {
-  const top = item.underExpanded
-    ? diffHeight + (item.coord.y * itemHeight)
-    : item.coord.y * itemHeight;
+  const top = item.coord.y * itemHeight + (item.underExpanded ? diffHeight : 0);
 
   if (item.expanded) {
     return {

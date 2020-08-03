@@ -11,7 +11,7 @@ export const useWindowWidth = (isAdaptive: boolean) => {
     }
 
     setWindowWidth(window.innerWidth);
-  });
+  }, 50);
 
   return windowWidth;
 };
