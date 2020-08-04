@@ -5,7 +5,7 @@ import { CloseRounded } from '@material-ui/icons';
 
 import { SettingsBlock } from '@features/AdaptivePage/components/SettingsBlock/SettingsBlock';
 import { IWithAdaptiveSettingsState } from '@features/AdaptivePage/hoc/withAdaptiveSettingsState';
-import { isDimensionType } from '@lib/typeGuards/isDimensionType';
+import { isDimensionType } from '@src/typeGuards/isDimensionType';
 import { getTabLabel } from '@features/AdaptivePage/components/SettingsPanel/utils/getTabLabel';
 import { useClasses } from '@features/AdaptivePage/components/SettingsPanel/hooks/useClasses';
 

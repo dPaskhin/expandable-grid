@@ -1,8 +1,8 @@
-import { initialDimensions } from '@lib/utils/initialDimensions';
-import { getAdaptiveValue } from '@lib/utils/getAdaptiveValue';
-import { IDimensions } from '@lib/interfaces/IDimensions';
-import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions';
-import { isDimensionType } from '@lib/typeGuards/isDimensionType';
+import { initialDimensions } from '@src/utils/initialDimensions';
+import { getAdaptiveValue } from '@src/utils/getAdaptiveValue';
+import { IDimensions } from '@src/interfaces/IDimensions';
+import { IAdaptiveDimensions } from '@src/interfaces/IAdaptiveDimensions';
+import { isDimensionType } from '@src/typeGuards/isDimensionType';
 
 export const getCurrentDimensions = (
   adaptiveDimensions: IAdaptiveDimensions,

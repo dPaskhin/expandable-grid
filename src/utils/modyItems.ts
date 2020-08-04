@@ -1,5 +1,5 @@
-import { IItem } from '@lib/interfaces/IItem';
-import { getItemCoord } from '@lib/utils/getItemCoord';
+import { IItem } from '@src/interfaces/IItem';
+import { getItemCoord } from '@src/utils/getItemCoord';
 
 const getItemEqualByXCoord = (
   item: IItem,

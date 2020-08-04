@@ -1,4 +1,4 @@
-import { ICoord } from '@lib/interfaces/ICord';
+import { ICoord } from '@src/interfaces/ICord';
 
 export interface IItem {
   id: number;

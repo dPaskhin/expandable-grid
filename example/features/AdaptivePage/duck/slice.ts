@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { DimensionsTypes } from '@src/enums/DimensionsTypes';
 import { IMediaValue } from '@features/AdaptivePage/interfaces/IMediaValue';
 import { IAdaptiveDimensions } from '@features/AdaptivePage/interfaces/IAdaptiveDimensions';
 

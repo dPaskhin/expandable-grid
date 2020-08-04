@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-import { ExpandableGrid } from '@lib/ExpandableGrid';
+import { ExpandableGrid } from '@src/ExpandableGrid';
 import { getItems } from '@common/utils/getItems';
 import { ExampleItem } from '@common/components/ExampleItem/ExampleItem';
 import { FloatingButton } from '@common/components/FloatingButton/FloatingButton';

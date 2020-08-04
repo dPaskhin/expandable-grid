@@ -1,4 +1,4 @@
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { DimensionsTypes } from '@src/enums/DimensionsTypes';
 import { IMediaValue } from '@features/AdaptivePage/interfaces/IMediaValue';
 
 export type IAdaptiveDimensions = {

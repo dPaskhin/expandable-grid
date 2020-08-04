@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { modifyItems } from '@lib/utils/modyItems';
-import { IItem } from '@lib/interfaces/IItem';
-import { getInitialItems } from '@lib/utils/getInitialItems';
+import { modifyItems } from '@src/utils/modyItems';
+import { IItem } from '@src/interfaces/IItem';
+import { getInitialItems } from '@src/utils/getInitialItems';
 
 interface IParams {
   itemsCount: number;

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { getGridMargins } from '@lib/utils/getGridMargins';
+import { getGridMargins } from '@src/utils/getGridMargins';
 
 interface IParams {
   gridHeight: number;

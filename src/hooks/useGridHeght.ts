@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { getGridHeight } from '@lib/utils/getGridHeight';
+import { getGridHeight } from '@src/utils/getGridHeight';
 
 interface IParams {
   itemsCount: number;

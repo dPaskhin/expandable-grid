@@ -1,5 +1,5 @@
-import { IItemPosition } from '@lib/interfaces/IItemPosition';
-import { IItem } from '@lib/interfaces/IItem';
+import { IItemPosition } from '@src/interfaces/IItemPosition';
+import { IItem } from '@src/interfaces/IItem';
 
 interface IParams {
   item: IItem;

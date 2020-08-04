@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 
-import '@lib/style/expandable.css';
-import { IProps } from '@lib/interfaces/IProps';
-import { GridClassnames } from '@lib/enums/GridClassnames';
-import { getGridItemClass } from '@lib/utils/getGridItemClass';
-import { useDimensions } from '@lib/hooks/useDimensions';
-import { useWindowWidth } from '@lib/hooks/useWindowWidth';
-import { useGridItems } from '@lib/hooks/useGridItems';
-import { useGridHeight } from '@lib/hooks/useGridHeght';
-import { useGridStyles } from '@lib/hooks/useGridStyles';
-import { useGridItemStylesGetter } from '@lib/hooks/useGridItemStylesGetter';
-import { useExpandedItem } from '@lib/hooks/useExpandedItem';
+import '@src/style/expandable.css';
+import { IProps } from '@src/interfaces/IProps';
+import { GridClassnames } from '@src/enums/GridClassnames';
+import { getGridItemClass } from '@src/utils/getGridItemClass';
+import { useDimensions } from '@src/hooks/useDimensions';
+import { useWindowWidth } from '@src/hooks/useWindowWidth';
+import { useGridItems } from '@src/hooks/useGridItems';
+import { useGridHeight } from '@src/hooks/useGridHeght';
+import { useGridStyles } from '@src/hooks/useGridStyles';
+import { useGridItemStylesGetter } from '@src/hooks/useGridItemStylesGetter';
+import { useExpandedItem } from '@src/hooks/useExpandedItem';
 
 export const ExpandableGrid: React.FC<IProps> = ({
   renderItems,

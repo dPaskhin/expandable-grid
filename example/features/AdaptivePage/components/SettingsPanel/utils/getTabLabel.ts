@@ -1,4 +1,4 @@
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { DimensionsTypes } from '@src/enums/DimensionsTypes';
 
 const tabLabels = {
   [DimensionsTypes.COLUMN_GAP]: 'column gap',

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
-import { IItem } from '@lib/interfaces/IItem';
-import { getItemPosition } from '@lib/utils/getItemPosition';
-import { getGridItemPadding } from '@lib/utils/getGridItemPadding';
+import { IItem } from '@src/interfaces/IItem';
+import { getItemPosition } from '@src/utils/getItemPosition';
+import { getGridItemPadding } from '@src/utils/getGridItemPadding';
 
 interface IParams {
   rowGap: number;

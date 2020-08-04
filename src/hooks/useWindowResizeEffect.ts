@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useDebounce } from '@lib/hooks/useDebounce';
+import { useDebounce } from '@src/hooks/useDebounce';
 
 export const useWindowResizeEffect = <T>(
   onResize: () => void,

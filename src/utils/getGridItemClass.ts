@@ -1,4 +1,4 @@
-import { GridClassnames } from '@lib/enums/GridClassnames';
+import { GridClassnames } from '@src/enums/GridClassnames';
 
 interface IParams {
   isExpanded: boolean;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useWindowResizeEffect } from '@lib/hooks/useWindowResizeEffect';
+import { useWindowResizeEffect } from '@src/hooks/useWindowResizeEffect';
 
 export const useWindowWidth = (isAdaptive: boolean) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

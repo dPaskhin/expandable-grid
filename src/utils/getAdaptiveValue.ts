@@ -1,5 +1,5 @@
-import { sortMediaValues } from '@lib/utils/sortMediaValues';
-import { IMediaValue } from '@lib/interfaces/IMediaValue';
+import { sortMediaValues } from '@src/utils/sortMediaValues';
+import { IMediaValue } from '@src/interfaces/IMediaValue';
 
 export const getAdaptiveValue = (
   windowWidth: number,

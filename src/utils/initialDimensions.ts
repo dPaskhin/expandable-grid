@@ -1,5 +1,5 @@
-import { IDimensions } from '@lib/interfaces/IDimensions';
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { IDimensions } from '@src/interfaces/IDimensions';
+import { DimensionsTypes } from '@src/enums/DimensionsTypes';
 
 export const initialDimensions: Required<IDimensions> = {
   [DimensionsTypes.COLUMN_GAP]: 20,

@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect, InferableComponentEnhancer } from 'react-redux';
 
 import { actions } from '@features/AdaptivePage/duck/slice';
-import { DimensionsTypes } from '@lib/enums/DimensionsTypes';
+import { DimensionsTypes } from '@src/enums/DimensionsTypes';
 import { IRootState } from '@example/app/initStore';
 import { IMediaValue } from '@features/AdaptivePage/interfaces/IMediaValue';
 import { adaptiveDimensionsSelector } from '@features/AdaptivePage/duck/selectors';

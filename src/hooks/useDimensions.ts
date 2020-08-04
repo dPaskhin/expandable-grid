@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
-import { IDimensions } from '@lib/interfaces/IDimensions';
-import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions';
-import { getCurrentDimensions } from '@lib/utils/getCurrentDimensions';
-import { initialDimensions } from '@lib/utils/initialDimensions';
+import { IDimensions } from '@src/interfaces/IDimensions';
+import { IAdaptiveDimensions } from '@src/interfaces/IAdaptiveDimensions';
+import { getCurrentDimensions } from '@src/utils/getCurrentDimensions';
+import { initialDimensions } from '@src/utils/initialDimensions';
 
 export const useDimensions = (
   windowWidth: number,

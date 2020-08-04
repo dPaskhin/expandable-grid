@@ -1,4 +1,4 @@
-import { IMediaValue as IMediaValueBase } from '@lib/interfaces/IMediaValue';
+import { IMediaValue as IMediaValueBase } from '@src/interfaces/IMediaValue';
 
 export interface IMediaValue<T = number> extends IMediaValueBase<T> {
   id?: number;

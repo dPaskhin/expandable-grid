@@ -1,5 +1,5 @@
-import { IDimensions } from '@lib/interfaces/IDimensions';
-import { IAdaptiveDimensions } from '@lib/interfaces/IAdaptiveDimensions';
+import { IDimensions } from '@src/interfaces/IDimensions';
+import { IAdaptiveDimensions } from '@src/interfaces/IAdaptiveDimensions';
 
 export interface IInjectedProps {
   isExpanded: boolean;
