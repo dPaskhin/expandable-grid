@@ -1,0 +1,11 @@
+.idea
+.gitignore
+.eslintignore
+.eslintrc.json
+example
+node_modules
+src
+tsconfig.json
+webpack.config.js
+yarn.lock
+yarn-error.log

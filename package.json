@@ -1,13 +1,15 @@
 {
   "name": "expandable-grid",
   "version": "1.0.0",
-  "description": "Expandable animated adaptive grid built with css position: absolute",
+  "description": "React expandable animated adaptive grid built with css position: absolute",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development",
-    "build": ""
+    "build": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [
+    "react",
     "typescript",
     "javascript",
     "grid",

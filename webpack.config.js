@@ -6,23 +6,31 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
 
-const outPutPath = './dist';
+const outPutPath = './lib';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const isDev = NODE_ENV === 'development';
 const isProd = NODE_ENV === 'production';
-const isDevServer = process.env.WEBPACK_DEV_SERVER;
 
+const getEntries = () => {
+    if (isDev) {
+        return {
+            example: ['@babel/polyfill', './example/index.tsx'],
+        };
+    }
+
+    return {
+        expandableGrid: ['@babel/polyfill', './src/ExpandableGrid.tsx'],
+    };
+};
 
 module.exports = {
-    entry: {
-        bundle: ['@babel/polyfill', './example/index.tsx'],
-    },
+    entry: getEntries(),
     output: {
         path: path.resolve(__dirname, outPutPath),
     },
-    devtool: isDev && 'source-map',
+    devtool: 'source-map',
     watch: isDev,
     resolve: {
         alias: {
@@ -35,12 +43,15 @@ module.exports = {
         minimize: isProd,
     },
     plugins: [
-        new HTMLPlugin({
-            template: './example/index.html',
-            filename: 'index.html',
-            chunks: ['bundle'],
-        }),
-        ...(!isDevServer ? [new CleanWebpackPlugin()] : []),
+        ...(isDev
+            ? [new HTMLPlugin({
+                template: './example/index.html',
+                filename: 'index.html',
+                chunks: ['example'],
+            })]
+            : []
+        ),
+        ...(!isDev ? [new CleanWebpackPlugin()] : []),
         new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin(),
     ],
