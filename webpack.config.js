@@ -28,6 +28,7 @@ const getEntries = () => {
 module.exports = {
     entry: getEntries(),
     output: {
+        libraryTarget: 'umd',
         path: path.resolve(__dirname, outPutPath),
     },
     devtool: 'source-map',
@@ -44,12 +45,12 @@ module.exports = {
     },
     plugins: [
         ...(isDev
-            ? [new HTMLPlugin({
-                template: './example/index.html',
-                filename: 'index.html',
-                chunks: ['example'],
-            })]
-            : []
+                ? [new HTMLPlugin({
+                    template: './example/index.html',
+                    filename: 'index.html',
+                    chunks: ['example'],
+                })]
+                : []
         ),
         ...(!isDev ? [new CleanWebpackPlugin()] : []),
         new MiniCssExtractPlugin(),
@@ -61,6 +62,21 @@ module.exports = {
         contentBase: path.resolve(__dirname, outPutPath),
         historyApiFallback: true,
     },
+    externals: isProd
+        ? {
+            react: {
+                root: 'React',
+                commonjs2: 'react',
+                commonjs: 'react',
+                amd: 'react',
+            },
+            'react-dom': {
+                root: 'ReactDOM',
+                commonjs2: 'react-dom',
+                commonjs: 'react-dom',
+                amd: 'react-dom',
+            },
+        } : {},
     module: {
         rules: [
             {
