@@ -58,7 +58,16 @@ import { ExpandableGrid } from 'expandable-grid';
           onClose={onClose}
         />
       )   
-    } 
+    },
+    ({ isExpanded, onExpanded, onClose }) => {
+      return (
+        <Item
+          isExpanded={isExpanded}
+          onClick={onExpanded}
+          onClose={onClose}
+        />
+      )   
+    },
   ]}
 />
 ```
@@ -90,7 +99,16 @@ import { ExpandableGrid } from 'expandable-grid';
           onClose={onClose}
         />
       )   
-    } 
+    },
+    ({ isExpanded, onExpanded, onClose }) => {
+      return (
+        <Item
+          isExpanded={isExpanded}
+          onClick={onExpanded}
+          onClose={onClose}
+        />
+      )   
+    }, 
   ]}
 />
 ```
@@ -152,7 +170,16 @@ import { ExpandableGrid } from 'expandable-grid';
           onClose={onClose}
         />
       )   
-    } 
+    },
+    ({ isExpanded, onExpanded, onClose }) => {
+      return (
+        <Item
+          isExpanded={isExpanded}
+          onClick={onExpanded}
+          onClose={onClose}
+        />
+      )   
+    },
   ]}
 />
 ```
