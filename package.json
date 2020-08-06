@@ -1,6 +1,6 @@
 {
   "name": "expandable-grid",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React expandable animated adaptive grid built with css position: absolute",
   "main": "index.js",
   "types": "index.d.ts",
