@@ -11,7 +11,7 @@ interface IParams {
   expandedItemHeight: number;
   itemHeight: number;
   diffHeight: number;
-  transitionDuration: number;
+  transitionDuration?: number;
 }
 
 export const useGridItemStylesGetter = ({
@@ -26,7 +26,7 @@ export const useGridItemStylesGetter = ({
   useCallback((item: IItem, isExpandedItem?: boolean) => ({
     ...getItemPosition({ item, itemHeight, diffHeight, columnsCount }),
     ...getGridItemPadding(rowGap, columnGap),
+    ...(transitionDuration !== undefined ? { transitionDuration: `${transitionDuration}ms` } : {}),
     height: isExpandedItem ? expandedItemHeight : itemHeight,
-    transitionDuration: `${transitionDuration}ms`,
   }), [diffHeight, rowGap, columnGap, columnsCount])
 );

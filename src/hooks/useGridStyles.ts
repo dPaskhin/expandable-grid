@@ -4,9 +4,9 @@ import { getGridMargins } from '@src/utils/getGridMargins';
 
 interface IParams {
   gridHeight: number;
-  transitionDuration: number;
   rowGap: number;
   columnGap: number;
+  transitionDuration?: number;
 }
 
 export const useGridStyles = ({
@@ -17,8 +17,8 @@ export const useGridStyles = ({
 }: IParams) => (
   useMemo(() => ({
     ...getGridMargins(rowGap, columnGap),
+    ...(transitionDuration !== undefined ? { transitionDuration: `${transitionDuration}ms` } : {}),
     width: `calc(100% + ${columnGap}px)`,
     height: gridHeight,
-    transitionDuration: `${transitionDuration}ms`,
   }), [rowGap, columnGap, gridHeight])
 );
