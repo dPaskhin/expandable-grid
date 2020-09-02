@@ -8,7 +8,7 @@ interface IParams {
   columnsCount: number;
 }
 
-export const getItemPosition = ({
+export const getItemPositionStyleObject = ({
   item,
   itemHeight,
   diffHeight,

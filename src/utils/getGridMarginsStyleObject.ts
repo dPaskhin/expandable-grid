@@ -1,4 +1,4 @@
-export const getGridMargins = (
+export const getGridMarginsStyleObject = (
   rowGap: number,
   columnGap: number,
 ) => ({

@@ -1,4 +1,4 @@
-export const getGridItemPadding = (
+export const getItemPaddingStyleObject = (
   rowGap: number,
   columnGap: number,
 ) => ({
