@@ -1,5 +1,6 @@
 import { IDimensions } from '@src/interfaces/IDimensions';
 import { IAdaptiveDimensions } from '@src/interfaces/IAdaptiveDimensions';
+import { ITransitionDuration } from '@src/interfaces/ITransitionDuration';
 
 export interface IInjectedProps {
   isExpanded: boolean;
@@ -9,7 +10,7 @@ export interface IInjectedProps {
 
 export interface IProps {
   renderItems: Array<(props: IInjectedProps) => JSX.Element>;
-  transitionDuration?: number;
+  transitionDuration?: ITransitionDuration;
   gridClassName?: string;
   gridItemClassName?: string;
   dimensions?: IDimensions;

@@ -9,6 +9,7 @@ import {
   IWithAdaptiveSettingsState,
   withAdaptiveSettingsState,
 } from '@features/AdaptivePage/hoc/withAdaptiveSettingsState';
+import { LoremText } from '@common/components/LoremText/LoremText';
 
 const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
   adaptiveDimensions,
@@ -34,6 +35,8 @@ const AdaptivePageComponent: React.FC<IWithAdaptiveSettingsState> = ({
           )
         ))}
       />
+
+      <LoremText/>
 
       <SettingsPanel
         open={panelOpen}

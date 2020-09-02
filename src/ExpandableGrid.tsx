@@ -16,7 +16,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
   renderItems,
   dimensions,
   adaptiveDimensions,
-  transitionDuration = 200,
+  transitionDuration,
   gridClassName = '',
   gridItemClassName = '',
 }) => {
