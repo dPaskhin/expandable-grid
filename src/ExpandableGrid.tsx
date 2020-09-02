@@ -67,7 +67,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
 
   return (
     <div
-      className={`${GridClassnames.GRID_CLASSNAME} ${gridClassName}`}
+      className={`${GridClassnames.GRID_CLASSNAME} ${gridClassName}`.trim()}
       style={gridStyles}
     >
       {items.map((item, index) => (

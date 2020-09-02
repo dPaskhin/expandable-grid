@@ -11,5 +11,5 @@ export const getGridItemClass = ({
 }: IParams) => {
   const expandedItemClass = isExpanded ? GridClassnames.GRID_ITEM_EXPANDED_CLASSNAME : '';
 
-  return `${GridClassnames.GRID_ITEM_CLASSNAME} ${expandedItemClass} ${extraClass || ''}`;
+  return `${GridClassnames.GRID_ITEM_CLASSNAME} ${expandedItemClass} ${extraClass || ''}`.trim();
 };
