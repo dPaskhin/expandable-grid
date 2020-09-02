@@ -1,5 +1,10 @@
 import React from 'react';
 
+export enum EntityTypes {
+  GRID = 'grid',
+  ITEM = 'item',
+}
+
 // Enum with dimensions for setting of grid
 export enum DimensionsTypes {
   ITEM_HEIGHT = 'itemHeight',
@@ -8,6 +13,11 @@ export enum DimensionsTypes {
   COLUMN_GAP = 'columnGap',
   EXPANDED_ITEM_HEIGHT = 'expandedItemHeight',
 }
+
+// Transition duration
+// Can be a number for grid and grid item together
+// Or can be more detailed for grid or grid item by object with keys from EntityTypes enum
+export type ITransitionDuration = number | { [K in EntityTypes]?: number };
 
 // Object for adaptiveDimensions
 export interface IMediaValue<T = number> {
@@ -44,7 +54,7 @@ export interface IProps {
   // This is required property
   renderItems: Array<(props: IInjectedProps) => JSX.Element>;
   // Transition duration of all animations in the component
-  transitionDuration?: number;
+  transitionDuration?: ITransitionDuration;
   // Additional class name for grid container
   gridClassName?: string;
   // Additional class name for grid item

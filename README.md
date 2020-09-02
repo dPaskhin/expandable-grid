@@ -76,14 +76,18 @@ import { ExpandableGrid } from 'expandable-grid';
 ```
 
 #### Usage of the component with all properties without adaptive set up
-You can set transition duration of all animations, add additional class name for grid or grid item.
+You can set transition duration of all animations for grid or grid item separately or in all. 
+Add additional class name for grid or grid item.
 Also you can set different dimensions of grid, e.g. item height, columns count and etc, it's not required set all of the dimensions.
 
 ```tsx
 import { ExpandableGrid } from 'expandable-grid';
 
 <ExpandableGrid
-  transitionDuration={300}
+  transitionDuration={{
+    grid: 500,
+    item: 300,
+  }}
   gridClassName='grid-class-name'
   gridItemClassName='grid-item-class-name'
   dimensions={{
@@ -124,7 +128,10 @@ If you add adaptive dimensions to the component, settings in dimensions property
 import { ExpandableGrid } from 'expandable-grid';
 
 <ExpandableGrid
-  transitionDuration={300}
+  transitionDuration={{
+    grid: 500,
+    item: 300,
+  }}
   gridClassName='grid-class-name'
   gridItemClassName='grid-item-class-name'
   adaptiveDimensions={{
@@ -192,6 +199,11 @@ import { ExpandableGrid } from 'expandable-grid';
 ```ts
 import React from 'react';
 
+export enum EntityTypes {
+  GRID = 'grid',
+  ITEM = 'item',
+}
+
 // Enum with dimensions for setting of grid  
 export enum DimensionsTypes {
   ITEM_HEIGHT = 'itemHeight',
@@ -200,6 +212,11 @@ export enum DimensionsTypes {
   COLUMN_GAP = 'columnGap',
   EXPANDED_ITEM_HEIGHT = 'expandedItemHeight',
 }
+
+// Transition duration
+// Can be a number for grid and grid item together
+// Or can be more detailed for grid or grid item by object with keys from EntityTypes enum
+export type ITransitionDuration = number | { [K in EntityTypes]?: number };
 
 // Object for adaptiveDimensions
 export interface IMediaValue<T = number> {
@@ -235,7 +252,7 @@ export interface IProps {
   // This is required property
   renderItems: Array<(props: IInjectedProps) => JSX.Element>;
   // Transition duration of all animations in the component
-  transitionDuration?: number;
+  transitionDuration?: ITransitionDuration;
   // Additional class name for grid
   gridClassName?: string;
   // Additional class name for grid item
@@ -262,7 +279,7 @@ const dimensions = {
 }
 
 const props = {
-  transitionDuration: 200,
+  transitionDuration: undefined,
   gridClassName: '',
   gridItemClassName: '',
   dimensions: dimensions,
