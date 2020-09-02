@@ -43,7 +43,7 @@ Then open [`localhost:8080`](http://localhost:8080) in a browser.
 ## Usage examples
 
 #### Code sandbox
-You can check this component on [https://codesandbox.io/](https://codesandbox.io/s/expandable-grid-9vohj)
+You can check this component on [https://codesandbox.io/](https://codesandbox.io/s/expandable-grid-cw8zx)
 
 #### Minimal usage of the component
 You can use the component without any properties beside ``renderItems``, in this case grid will be set up by default properties.
