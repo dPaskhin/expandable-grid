@@ -13,12 +13,14 @@ export const getGridHeight = ({
   itemHeight,
   diffHeight,
 }: IParams) => {
-  const needAdditionalRow = expandedItem
-    && itemsCount % columnsCount !== 1
-    && columnsCount > 1;
+  const isThereExpandedItem = expandedItem !== null;
+  const isThereManyItemsInLastRow = itemsCount % columnsCount !== 1;
+  const isThereManyColumnsInGrid = columnsCount > 1;
+  const needAdditionalRow = isThereExpandedItem && isThereManyItemsInLastRow && isThereManyColumnsInGrid;
+
   const rowsCount = Math.ceil(itemsCount / columnsCount) + (needAdditionalRow ? 1 : 0);
 
-  if (expandedItem) {
+  if (isThereExpandedItem) {
     return rowsCount * itemHeight + diffHeight;
   }
 
