@@ -8,6 +8,7 @@ interface IParams {
   expandedItem: number | null;
   diffHeight: number;
   columnsCount: number;
+  rowGap: number;
 }
 
 export const useGridHeight = ({
@@ -16,6 +17,7 @@ export const useGridHeight = ({
   itemsCount,
   diffHeight,
   itemHeight,
+  rowGap
 }: IParams) => useMemo(() => (
   getGridHeight({
     itemsCount,
@@ -23,5 +25,6 @@ export const useGridHeight = ({
     expandedItem,
     diffHeight,
     columnsCount,
+    rowGap
   })
 ), [itemHeight, expandedItem, columnsCount]);

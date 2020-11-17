@@ -4,6 +4,7 @@ interface IParams {
   columnsCount: number;
   itemHeight: number;
   diffHeight: number;
+  rowGap: number;
 }
 
 export const getGridHeight = ({
@@ -12,6 +13,7 @@ export const getGridHeight = ({
   columnsCount,
   itemHeight,
   diffHeight,
+  rowGap
 }: IParams) => {
   const isThereExpandedItem = expandedItem !== null;
   const isThereManyItemsInLastRow = itemsCount % columnsCount !== 1;
@@ -20,9 +22,11 @@ export const getGridHeight = ({
 
   const rowsCount = Math.ceil(itemsCount / columnsCount) + (needAdditionalRow ? 1 : 0);
 
+  const gapHeight = (rowsCount - 1) * rowGap;
+
   if (isThereExpandedItem) {
-    return rowsCount * itemHeight + diffHeight;
+    return rowsCount * itemHeight + diffHeight + gapHeight;
   }
 
-  return rowsCount * itemHeight;
+  return rowsCount * itemHeight + gapHeight;
 };

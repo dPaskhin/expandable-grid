@@ -46,6 +46,7 @@ export const ExpandableGrid: React.FC<IProps> = ({
     diffHeight: expandedItemHeight - itemHeight,
     itemsCount: items.length,
     expandedItem,
+    rowGap: rowGap,
   });
 
   const gridStyles = useGridStyles({
