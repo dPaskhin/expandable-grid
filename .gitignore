@@ -1,4 +1,4 @@
 .idea
-/node_modules
-yarn-error.log
-/lib
+node_modules
+lib
+.DS_Store

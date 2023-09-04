@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "target": "ES5",
-    "jsx": "react",
-    "declaration": true,
+    "target": "ESNext",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -13,6 +11,5 @@
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
     "isolatedModules": true
-  },
-  "include": ["./src/main/**/*"]
+  }
 }
