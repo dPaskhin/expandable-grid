@@ -78,7 +78,7 @@ export class GridStyles {
     }
 
     // When only a single item occupies the last row, the shifted grid row's count remains identical to the default layout.
-    if (this.grid.itemsCount % this.grid.columnsCount !== 1) {
+    if (this.grid.columnsCount !== 1 && this.grid.itemsCount % this.grid.columnsCount !== 1) {
       itemsHeight += this.parameters.outerItemHeight;
     }
 

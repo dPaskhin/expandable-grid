@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, memo, useMemo } from 'react';
+import React, { CSSProperties, FC, useMemo } from 'react';
 import { Grid } from './Grid';
 import { GridStyles } from './GridStyles';
 import { useRerender } from './useRerender';
@@ -28,7 +28,7 @@ export interface IProps {
   itemStyle?: CSSProperties;
 }
 
-export const ExpandableGrid: FC<IProps> = memo((props) => {
+export const ExpandableGrid: FC<IProps> = (props) => {
   const { columnsCount, gridClassName, gridItemClassName, style, itemStyle, items, parameters } = props;
 
   const rerender = useRerender();
@@ -59,4 +59,6 @@ export const ExpandableGrid: FC<IProps> = memo((props) => {
       ))}
     </div>
   );
-});
+};
+
+ExpandableGrid.displayName = 'ExpandableGrid';

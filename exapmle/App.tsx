@@ -169,7 +169,10 @@ export const App: FC = () => {
             />
           </ListItem>
           <ListItem>
-            <Stack direction={'row'} columnGap={1}>
+            <Stack
+              direction={'row'}
+              columnGap={1}
+            >
               <PositiveNumberField
                 label={"Column's gap"}
                 value={columnGap}

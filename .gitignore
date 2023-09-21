@@ -1,4 +1,6 @@
 .idea
+coverage
+.nyc_output
 node_modules
 lib
 .DS_Store

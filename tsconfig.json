@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "target": "ES5",
-    "jsx": "react",
-    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "allowJs": true,
     "skipLibCheck": true,
+    "target": "ES5",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "strict": true,
     "noUncheckedIndexedAccess": true,
-    "isolatedModules": true
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "lib": ["es2022"],
+    "jsx": "react",
+    "declaration": true
   },
   "include": ["./src/main/**/*"]
 }
