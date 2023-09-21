@@ -37,27 +37,29 @@ export const ExpandableGrid: FC<IProps> = (props) => {
 
   const gridStyles = useMemo(() => new GridStyles(grid, parameters || {}), [grid, parameters]);
 
-  return (
-    <div
-      className={gridClassName}
-      style={Object.assign(gridStyles.getGridStyles(), style)}
-    >
-      {grid.items.map((item, index) => (
-        <div
-          key={index}
-          className={gridItemClassName}
-          style={Object.assign(gridStyles.getItemStyles(item), itemStyle)}
-        >
-          {items[index]?.({
-            index,
-            isExpanded: grid.isItemExpanded(item),
-            onExpand: () => grid.expandItem(item),
-            onClose: () => grid.collapseExpandedItem(),
-            onToggle: () => grid.toggleExpandedItem(item),
-          })}
-        </div>
-      ))}
-    </div>
+  return React.createElement(
+    'div',
+    {
+      className: gridClassName,
+      style: Object.assign(gridStyles.getGridStyles(), style),
+    },
+    grid.items.map((item, index) =>
+      React.createElement(
+        'div',
+        {
+          key: index,
+          className: gridItemClassName,
+          style: Object.assign(gridStyles.getItemStyles(item), itemStyle),
+        },
+        items[index]?.({
+          index,
+          isExpanded: grid.isItemExpanded(item),
+          onExpand: () => grid.expandItem(item),
+          onClose: () => grid.collapseExpandedItem(),
+          onToggle: () => grid.toggleExpandedItem(item),
+        })
+      )
+    )
   );
 };
 

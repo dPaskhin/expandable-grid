@@ -13,7 +13,6 @@
     "moduleResolution": "Node",
     "module": "ESNext",
     "lib": ["es2022"],
-    "jsx": "react",
     "declaration": true
   },
   "include": ["./src/main/**/*"]
