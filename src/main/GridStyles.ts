@@ -1,17 +1,17 @@
-import type { Parameters } from './ExpandableGrid';
+import type { ExpandableGridParameters } from './ExpandableGrid';
 import type { Grid, Item } from './Grid';
 import type { CSSProperties } from 'react';
 
 type ItemPosition = Pick<CSSProperties, 'top' | 'left' | 'right'>;
 
-const DEFAULT_PARAMETERS: Parameters = {
+const DEFAULT_PARAMETERS: ExpandableGridParameters = {
   rowGap: 20,
   columnGap: 20,
   itemHeight: 150,
   expandedItemHeight: 350,
 };
 
-interface NormalizedParameters extends Parameters {
+interface NormalizedParameters extends ExpandableGridParameters {
   outerItemHeight: number;
   outerExpandedItemHeight: number;
   expandedExtraHeight: number;
@@ -22,7 +22,7 @@ export class GridStyles {
 
   constructor(
     private readonly grid: Grid,
-    parameters: Partial<Parameters>
+    parameters: Partial<ExpandableGridParameters>
   ) {
     this.parameters = this.normalizeParameters(parameters);
   }
@@ -51,7 +51,7 @@ export class GridStyles {
     );
   }
 
-  private normalizeParameters(parameters: Partial<Parameters>): NormalizedParameters {
+  private normalizeParameters(parameters: Partial<ExpandableGridParameters>): NormalizedParameters {
     const normalized: NormalizedParameters = Object.assign(
       DEFAULT_PARAMETERS,
       {

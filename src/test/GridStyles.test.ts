@@ -1,8 +1,8 @@
 import { GridStyles } from '../main/GridStyles';
 import { Grid } from '../main/Grid';
-import { Parameters } from '../main';
+import { ExpandableGridParameters } from '../main';
 
-const parameters: Parameters = {
+const parameters: ExpandableGridParameters = {
   rowGap: 20,
   columnGap: 20,
   itemHeight: 150,

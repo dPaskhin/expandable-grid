@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { ChevronLeft, CloseRounded, Menu } from '@mui/icons-material';
 import { ChangeEvent, FC, useState } from 'react';
-import { ExpandableGrid, IItemProps } from '../src/main';
+import { ExpandableGrid, IExpandableGridItemProps } from '../src/main';
 import { fill, range } from 'lodash';
 import { motion } from 'framer-motion';
 
@@ -219,7 +219,7 @@ export const App: FC = () => {
   );
 };
 
-const Item: FC<IItemProps> = ({ onToggle, isExpanded, onClose }) => {
+const Item: FC<IExpandableGridItemProps> = ({ onToggle, isExpanded, onClose }) => {
   const variants = {
     shown: { scale: [0.8, 3, 1.8], x: '-100%', y: '100%' },
     hidden: { scale: 0 },

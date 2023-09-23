@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React from 'react';
 
 export function useRerender() {
-  const [, setState] = useState(0);
+  const [, setState] = React.useState(0);
 
   return () => setState((prevState) => prevState + 1);
 }

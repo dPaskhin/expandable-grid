@@ -1,19 +1,16 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "target": "ES5",
     "allowJs": true,
-    "resolveJsonModule": true,
     "moduleDetection": "force",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "moduleResolution": "Node",
     "module": "ESNext",
     "lib": ["es2022"],
-    "declaration": true
+    "noEmit": true
   },
-  "include": ["./src/main/**/*"]
+  "include": ["./src/**/*"]
 }

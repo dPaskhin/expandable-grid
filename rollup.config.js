@@ -6,7 +6,7 @@ const terser = require('@rollup/plugin-terser');
  */
 module.exports = {
   input: './src/main/index.ts',
-  plugins: [typescript({ outputToFilesystem: true }), terser()],
+  plugins: [typescript({ outputToFilesystem: true, tsconfig: './tsconfig.build.json' }), terser()],
   external: ['react'],
   output: [
     {

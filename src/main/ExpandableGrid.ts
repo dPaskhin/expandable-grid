@@ -1,9 +1,9 @@
-import React, { CSSProperties, FC, useMemo } from 'react';
+import React from 'react';
 import { Grid } from './Grid';
 import { GridStyles } from './GridStyles';
 import { useRerender } from './useRerender';
 
-export interface IItemProps {
+export interface IExpandableGridItemProps {
   index: number;
   isExpanded: boolean;
   onExpand: () => void;
@@ -11,31 +11,31 @@ export interface IItemProps {
   onToggle: () => void;
 }
 
-export interface Parameters {
+export interface ExpandableGridParameters {
   rowGap: number;
   columnGap: number;
   itemHeight: number;
   expandedItemHeight: number;
 }
 
-export interface IProps {
-  items: Array<FC<IItemProps>>;
+export interface IExpandableGridProps {
+  items: Array<React.FC<IExpandableGridItemProps>>;
   columnsCount: number;
-  parameters?: Partial<Parameters>;
+  parameters?: Partial<ExpandableGridParameters>;
   gridClassName?: string;
   gridItemClassName?: string;
-  style?: CSSProperties;
-  itemStyle?: CSSProperties;
+  style?: React.CSSProperties;
+  itemStyle?: React.CSSProperties;
 }
 
-export const ExpandableGrid: FC<IProps> = (props) => {
+export const ExpandableGrid: React.FC<IExpandableGridProps> = (props) => {
   const { columnsCount, gridClassName, gridItemClassName, style, itemStyle, items, parameters } = props;
 
   const rerender = useRerender();
 
-  const grid = useMemo(() => new Grid(columnsCount, items.length, rerender), [columnsCount, items.length]);
+  const grid = React.useMemo(() => new Grid(columnsCount, items.length, rerender), [columnsCount, items.length]);
 
-  const gridStyles = useMemo(() => new GridStyles(grid, parameters || {}), [grid, parameters]);
+  const gridStyles = React.useMemo(() => new GridStyles(grid, parameters || {}), [grid, parameters]);
 
   return React.createElement(
     'div',
@@ -51,7 +51,7 @@ export const ExpandableGrid: FC<IProps> = (props) => {
           className: gridItemClassName,
           style: Object.assign(gridStyles.getItemStyles(item), itemStyle),
         },
-        items[index]?.({
+        items[index]!({
           index,
           isExpanded: grid.isItemExpanded(item),
           onExpand: () => grid.expandItem(item),
