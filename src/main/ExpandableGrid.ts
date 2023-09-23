@@ -1,7 +1,9 @@
 import React from 'react';
 import { Grid } from './Grid';
-import { GridStyles } from './GridStyles';
+import { ExpandableGridParameters, GridStyles } from './GridStyles';
 import { useRerender } from './useRerender';
+
+export type { ExpandableGridParameters };
 
 export interface IExpandableGridItemProps {
   index: number;
@@ -9,13 +11,6 @@ export interface IExpandableGridItemProps {
   onExpand: () => void;
   onClose: () => void;
   onToggle: () => void;
-}
-
-export interface ExpandableGridParameters {
-  rowGap: number;
-  columnGap: number;
-  itemHeight: number;
-  expandedItemHeight: number;
 }
 
 export interface IExpandableGridProps {

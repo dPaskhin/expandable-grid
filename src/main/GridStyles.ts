@@ -1,6 +1,12 @@
-import type { ExpandableGridParameters } from './ExpandableGrid';
-import type { Grid, Item } from './Grid';
 import type { CSSProperties } from 'react';
+import type { Grid, Item } from './Grid';
+
+export interface ExpandableGridParameters {
+  rowGap: number;
+  columnGap: number;
+  itemHeight: number;
+  expandedItemHeight: number;
+}
 
 type ItemPosition = Pick<CSSProperties, 'top' | 'left' | 'right'>;
 
