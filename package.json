@@ -36,6 +36,14 @@
     "url": "https://github.com/dPaskhin/expandable-grid",
     "type": "git"
   },
+  "bugs": {
+    "url": "https://github.com/dPaskhin/expandable-grid/issues"
+  },
+  "homepage": "https://github.com/dPaskhin/expandable-grid#readme",
+  "readmeFilename": "README.md",
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.3",
