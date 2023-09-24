@@ -1,4 +1,6 @@
 .idea
-/node_modules
-yarn-error.log
-/lib
+coverage
+.nyc_output
+node_modules
+lib
+.DS_Store

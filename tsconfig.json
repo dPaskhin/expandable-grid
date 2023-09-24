@@ -1,20 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "esModuleInterop": true,
-    "importHelpers": true,
-    "removeComments": true,
-    "moduleResolution": "node",
-    "declaration": true,
-    "jsx": "react",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "moduleDetection": "force",
     "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "@example/*": ["example/*"],
-      "@features/*": ["example/features/*"],
-      "@common/*": ["example/common/*"],
-      "@src/*": ["src/*"]
-    }
-  }
+    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "lib": ["es2022"],
+    "noEmit": true
+  },
+  "include": ["./src/**/*"]
 }
