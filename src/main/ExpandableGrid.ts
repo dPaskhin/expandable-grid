@@ -19,12 +19,22 @@ export interface IExpandableGridProps {
   parameters?: Partial<ExpandableGridParameters>;
   gridClassName?: string;
   gridItemClassName?: string;
+  gridExpandedItemClassName?: string;
   style?: React.CSSProperties;
   itemStyle?: React.CSSProperties;
 }
 
 export const ExpandableGrid: React.FC<IExpandableGridProps> = (props) => {
-  const { columnsCount, gridClassName, gridItemClassName, style, itemStyle, items, parameters } = props;
+  const {
+    columnsCount,
+    gridClassName,
+    gridItemClassName,
+    gridExpandedItemClassName,
+    style,
+    itemStyle,
+    items,
+    parameters,
+  } = props;
 
   const rerender = useRerender();
 
@@ -43,7 +53,7 @@ export const ExpandableGrid: React.FC<IExpandableGridProps> = (props) => {
         'div',
         {
           key: index,
-          className: gridItemClassName,
+          className: grid.isItemExpanded(item) ? gridExpandedItemClassName : gridItemClassName,
           style: Object.assign(gridStyles.getItemStyles(item), itemStyle),
         },
         items[index]!({

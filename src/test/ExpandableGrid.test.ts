@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import { ExpandableGrid, IExpandableGridItemProps, IExpandableGridProps } from '../main';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
 describe('ExpandableGrid', () => {
-  it('CheckboxWithLabel changes the text after click', () => {
+  it('should render', () => {
     render(
       React.createElement<IExpandableGridProps>(ExpandableGrid, {
         columnsCount: 5,
@@ -125,5 +125,30 @@ describe('ExpandableGrid', () => {
     fireEvent.click($item);
 
     expect(Number.parseInt($item.parentElement!.style.right)).toBe(50);
+  });
+
+  it("should render expanded item's className", () => {
+    const items = [
+      (({ onExpand }) =>
+        React.createElement<HTMLAttributes<HTMLDivElement>>(
+          'div',
+          { onClick: onExpand },
+          'Item'
+        )) as React.FC<IExpandableGridItemProps>,
+    ];
+    const { getByText } = render(
+      React.createElement(ExpandableGrid, {
+        items,
+        columnsCount: 3,
+        gridExpandedItemClassName: 'item item__expanded',
+      })
+    );
+
+    const $item = getByText('Item');
+
+    fireEvent.click($item);
+
+    expect($item.parentElement!.classList.contains('item')).toBe(true);
+    expect($item.parentElement!.classList.contains('item__expanded')).toBe(true);
   });
 });
