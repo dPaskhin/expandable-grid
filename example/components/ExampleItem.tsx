@@ -1,6 +1,6 @@
 import { Box, css, styled } from '@mui/material';
 import { FC } from 'react';
-import { IExpandableGridItemProps } from '../../src/main';
+import { IExpandableGridItemProps } from '../../lib';
 import { motion } from 'framer-motion';
 import { CloseRounded } from '@mui/icons-material';
 
