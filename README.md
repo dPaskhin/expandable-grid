@@ -1,309 +1,139 @@
 # Expandable Grid
 
-> React expandable animated adaptive grid built with css position: absolute
+React grid component with expandable items and adaptive functionality, crafted using position: absolute CSS.
 
 [![NPM Version][npm-image]][npm-url]
 
-This component is for building grid where elements can be expanded and collapsed.
-It's just like accordion plugin, but made for grid. And if you set up this grid one column you get same accordion effect.
+The grid expandable component is an interactive layout tool designed to create grids with expandable and collapsible
+elements. This dynamic component allows users to reveal or hide content within the grid, enhancing the user experience
+by accommodating detailed information without overwhelming the interface. It functions similarly to an accordion
+mechanism, adapted for grid usage. When configured as a single-column grid, it transforms into a classic accordion,
+offering a familiar experience with a versatile twist.
 
 ## Installation
 
-NPM
-
-```sh
-npm install expandable-grid
+```shell
+npm i --save expandable-grid
 ```
 
-YARN
+or
 
-```sh
+```shell
 yarn add expandable-grid
 ```
 
-## Development setup
+## Examples
 
-To build the example locally, clone the [repository](https://github.com/MiDovaah/expandable-grid) and run:
+### Locale
 
-NPM
+To build the example locally, clone the [repository](https://github.com/dPaskhin/expandable-grid) and run:
 
 ```sh
 npm install
-npm run start
+npm run build
+
+cd example
+
+npm install
+npm run watch
 ```
 
-YARN
+Then open [`localhost:1234`](http://localhost:1234) in a browser.
 
-```sh
-yarn install
-yarn run start
-```
-
-Then open [`localhost:8080`](http://localhost:8080) in a browser.
-
-## Usage examples
-
-#### Code sandbox
+### Code sandbox
 
 You can check this component on [https://codesandbox.io/](https://codesandbox.io/s/expandable-grid-cw8zx)
 
-#### Minimal usage of the component
+## Base usage of the component
 
-You can use the component without any properties beside `renderItems`, in this case grid will be set up by default properties.
+To quickly integrate the grid into your application, the only required properties are items and columns' count. When
+instantiated
+without any additional properties, the component defaults to a pre-configured grid setup.
 
 ```tsx
-import { ExpandableGrid } from 'expandable-grid';
+import { ExpandableGrid, IExpandableGridItemProps } from 'expandable-grid';
+import { FC } from 'react';
 
 <ExpandableGrid
-  renderItems={[
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-  ]}
+  items={[Item, Item, Item, Item]}
+  columnsCount={3}
 />;
+
+const Item: FC<IExpandableGridItemProps> = ({ onToggle, isExpanded, onClose, onExpand, index }) => {
+  return <div></div>;
+};
 ```
 
-#### Usage of the component with all properties without adaptive set up
+### Customization with class names and styles
 
-You can set transition duration of all animations for grid or grid item separately or in all.
-Add additional class name for grid or grid item.
-Also you can set different dimensions of grid, e.g. item height, columns count and etc, it's not required set all of the dimensions.
+You can enhance the visual presentation by applying custom classNames and inline styles to the grid elements.
 
 ```tsx
-import { ExpandableGrid } from 'expandable-grid';
+import { ExpandableGrid, IExpandableGridItemProps } from 'expandable-grid';
+import { FC } from 'react';
 
 <ExpandableGrid
-  transitionDuration={{
-    grid: 500,
-    item: 300,
-  }}
-  gridClassName="grid-class-name"
-  gridItemClassName="grid-item-class-name"
-  dimensions={{
+  items={[Item, Item, Item, Item]}
+  columnsCount={3}
+  gridClassName={'grid-class-name'}
+  gridItemClassName={'grid-item-class-name'}
+  gridExpandedItemClassName={'grid-expanded-item-class-name'}
+  style={{ transitionDuration: '100ms' }}
+  itemStyle={{ transitionDuration: '200ms' }}
+/>;
+
+const Item: FC<IExpandableGridItemProps> = ({ onToggle, isExpanded, onClose, onExpand, index }) => {
+  return <div></div>;
+};
+```
+
+#### Parameter customization and responsive settings
+
+You can define key parameters to control the spacing and sizing of the grid and its elements.
+
+```tsx
+import { ExpandableGrid, IExpandableGridItemProps } from 'expandable-grid';
+import { FC } from 'react';
+
+// Constants parameters
+<ExpandableGrid
+  items={[Item, Item, Item, Item]}
+  columnsCount={3}
+  parameters={{
+    rowGap: 10,
+    columnGap: 10,
     itemHeight: 100,
-    columnsCount: 3,
-    rowGap: 20,
-    columnGap: 20,
-    expandedItemHeight: 300,
+    expandedItemHeight: 150,
   }}
-  renderItems={[
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-  ]}
 />;
-```
 
-#### Usage of the component with adaptive set up
-
-You can set different dimensions of grid for window width range by adding array of media objects to each dimension.
-If you add adaptive dimensions to the component, settings in dimensions property will be ignored.
-
-```tsx
-import { ExpandableGrid } from 'expandable-grid';
-
+// Adaptive variants
+// The key for each parameter corresponds to the window width, 
+// and the value determines the parameter that will be applied at that specific width
 <ExpandableGrid
-  transitionDuration={{
-    grid: 500,
-    item: 300,
+  items={[Item, Item, Item, Item]}
+  columnsCount={{ 320: 1, 768: 3, 1200: 6 }}
+  parameters={{
+    rowGap: { 320: 10, 768: 12, 1200: 16 },
+    columnGap: { 320: 10, 768: 12, 1200: 16 },
+    itemHeight: { 320: 100, 768: 150, 1200: 200 },
+    expandedItemHeight: { 320: 150, 768: 200, 1200: 300 },
   }}
-  gridClassName="grid-class-name"
-  gridItemClassName="grid-item-class-name"
-  adaptiveDimensions={{
-    itemHeight: [
-      {
-        windowWidth: { min: 320, max: 768 },
-        value: 150,
-      },
-      {
-        windowWidth: { min: 769, max: 1200 },
-        value: 200,
-      },
-    ],
-    columnsCount: [
-      {
-        windowWidth: { min: 320, max: 768 },
-        value: 3,
-      },
-      {
-        windowWidth: { min: 769, max: 1200 },
-        value: 5,
-      },
-    ],
-    rowGap: [
-      {
-        windowWidth: { min: 320, max: 768 },
-        value: 20,
-      },
-      {
-        windowWidth: { min: 769, max: 1200 },
-        value: 30,
-      },
-    ],
-    columnGap: [
-      {
-        windowWidth: { min: 320, max: 768 },
-        value: 20,
-      },
-      {
-        windowWidth: { min: 769, max: 1200 },
-        value: 30,
-      },
-    ],
-    expandedItemHeight: [
-      {
-        windowWidth: { min: 320, max: 768 },
-        value: 300,
-      },
-      {
-        windowWidth: { min: 769, max: 1200 },
-        value: 350,
-      },
-    ],
-  }}
-  renderItems={[
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-    ({ isExpanded, onExpanded, onClose }) => {
-      return (
-        <Item
-          isExpanded={isExpanded}
-          onClick={onExpanded}
-          onClose={onClose}
-        />
-      );
-    },
-  ]}
 />;
+
+const Item: FC<IExpandableGridItemProps> = ({ onToggle, isExpanded, onClose, onExpand, index }) => {
+  return <div></div>;
+};
 ```
 
-## Properties
+#### Default values for parameters are given below:
 
 ```ts
-import React from 'react';
-
-export enum EntityTypes {
-  GRID = 'grid',
-  ITEM = 'item',
-}
-
-// Enum with dimensions for setting of grid
-export enum DimensionsTypes {
-  ITEM_HEIGHT = 'itemHeight',
-  COLUMNS_COUNT = 'columnsCount',
-  ROW_GAP = 'rowGap',
-  COLUMN_GAP = 'columnGap',
-  EXPANDED_ITEM_HEIGHT = 'expandedItemHeight',
-}
-
-// Transition duration
-// Can be a number for grid and grid item together
-// Or can be more detailed for grid or grid item by object with keys from EntityTypes enum
-export type ITransitionDuration = number | { [K in EntityTypes]?: number };
-
-// Object for adaptiveDimensions
-export interface IMediaValue<T = number> {
-  // Range of window width
-  windowWidth: { min: T; max: T };
-  // Value for current window width
-  value: T;
-}
-
-// Object with dimensions (described in DimensionsTypes enum) and values (number) for set up grid
-export type IDimensions = {
-  [K in DimensionsTypes]?: number;
-};
-
-// Object with dimensions (described in DimensionsTypes enum) and adaptive values (described in IMediaValue interface) for set up adaptive grid
-export type IAdaptiveDimensions = {
-  [K in DimensionsTypes]?: IMediaValue[];
-};
-
-export interface IInjectedProps {
-  // Whether the item is currently expanded
-  isExpanded: boolean;
-  // Handler for expand the item
-  onExpand?: () => void;
-  // Handler for collapse the expanded item
-  onClose: () => void;
-}
-
-// Interface of main component props
-export interface IProps {
-  // Array of items to render in the grid
-  // They should be functions which take props described in IInjectedProps interface and return JSX element
-  // This is required property
-  renderItems: Array<(props: IInjectedProps) => JSX.Element>;
-  // Transition duration of all animations in the component
-  transitionDuration?: ITransitionDuration;
-  // Additional class name for grid
-  gridClassName?: string;
-  // Additional class name for grid item
-  gridItemClassName?: string;
-  // Object with dimensions (described in DimensionsTypes enum) and values (number) for set up grid
-  dimensions?: IDimensions;
-  // Object with dimensions (described in DimensionsTypes enum) and adaptive values (described in IMediaValue interface) for set up adaptive grid
-  adaptiveDimensions?: IAdaptiveDimensions;
-}
-
-// This is main component to import in your react project
-export const ExpandableGrid: React.FC<IProps>;
-```
-
-#### Default values for properties are given below:
-
-```ts
-const dimensions = {
-  columnsCount: 3,
+const DEFAULT_PARAMETERS = {
+  rowGap: 20,
+  columnGap: 20,
   itemHeight: 150,
   expandedItemHeight: 350,
-  columnGap: 20,
-  rowGap: 20,
-};
-
-const props = {
-  transitionDuration: undefined,
-  gridClassName: '',
-  gridItemClassName: '',
-  dimensions: dimensions,
-  adaptiveDimensions: undefined,
 };
 ```
 
@@ -311,17 +141,16 @@ const props = {
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-<https://github.com/MiDovaah/expandable-grid/blob/master/LICENSE.md>
+<https://github.com/dPaskhin/expandable-grid/blob/master/LICENSE.md>
 
 ## Contributing
 
-1. Fork it (<https://github.com/MiDovaah/expandable-grid/fork>)
+1. Fork it (<https://github.com/dPaskhin/expandable-grid/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
+3. Commit your changes (`git commit -m 'feat: add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-<!-- Markdown link & img dfn's -->
-
 [npm-image]: https://img.shields.io/npm/v/expandable-grid.svg?style=flat-square
+
 [npm-url]: https://www.npmjs.com/package/expandable-grid

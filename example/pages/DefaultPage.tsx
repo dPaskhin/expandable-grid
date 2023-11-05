@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { AppTemplate, ExampleItem, LoremParagraph, PositiveNumberField, TabType } from '../components';
-import { ExpandableGrid } from '../../src/main';
+import { ExpandableGrid } from '../../lib';
 import { fill, range } from 'lodash';
 import { List, ListItem, Stack } from '@mui/material';
 import { useLocation } from 'wouter';

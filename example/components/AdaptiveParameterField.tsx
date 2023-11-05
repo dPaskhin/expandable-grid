@@ -2,7 +2,7 @@ import { Dispatch, FC, ReactNode, useEffect, useState } from 'react';
 import { IconButton, List, ListItem, ListItemButton, ListSubheader, Stack } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
 import { PositiveNumberField } from './PositiveNumberField';
-import { MediaQueryParametersMap } from '../../src/main';
+import { MediaQueryParametersMap } from '../../lib';
 
 interface WindowWidthParameter {
   width: number;

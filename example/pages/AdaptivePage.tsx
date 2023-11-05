@@ -9,7 +9,7 @@ import {
 } from '../components';
 import { useLocation } from 'wouter';
 import { DEFAULT_PAGE_ROUTER } from './DefaultPage';
-import { ExpandableGrid, MediaQueryParametersMap } from '../../src/main';
+import { ExpandableGrid, MediaQueryParametersMap } from '../../lib';
 import { fill, range } from 'lodash';
 import { Divider, List, ListItem, ListSubheader } from '@mui/material';
 
