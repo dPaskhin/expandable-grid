@@ -1,0 +1,23 @@
+{
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "npm install"
+    },
+    {
+      "name": "Building",
+      "command": "npm run build"
+    },
+    {
+      "name": "Install Dependencies of example project",
+      "command": "cd example && npm install"
+    }
+  ],
+  "tasks": {
+    "build": {
+      "name": "Start development server",
+      "command": "cd example && npm run watch",
+      "runAtStart": true
+    }
+  }
+}
