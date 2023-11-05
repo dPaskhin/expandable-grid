@@ -1,5 +1,14 @@
+/**
+ * `MediaQueryParametersMap` is a type that represents a mapping of media query breakpoints to
+ * numerical values. The string keys correspond to the minimum width of the viewport, while the
+ * number values are the parameters to be applied at or above that viewport width.
+ */
 export type MediaQueryParametersMap = Record<string, number>;
 
+/**
+ * `MediaQueryValue` can either be a simple number representing a fixed value or a
+ * `MediaQueryParametersMap` object for responsive settings that vary depending on the viewport width.
+ */
 export type MediaQueryValue = number | MediaQueryParametersMap;
 
 const ParameterKeys = ['rowGap', 'columnGap', 'itemHeight', 'expandedItemHeight'] as const;
