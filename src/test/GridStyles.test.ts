@@ -1,12 +1,15 @@
 import { GridStyles } from '../main/GridStyles';
 import { Grid } from '../main/Grid';
-import { ExpandableGridParameters } from '../main';
+import { NormalizedParameters } from '../main/normalizeParameters';
 
-const parameters: ExpandableGridParameters = {
+const parameters: NormalizedParameters = {
   rowGap: 20,
   columnGap: 20,
   itemHeight: 150,
   expandedItemHeight: 350,
+  outerItemHeight: 150 + 20,
+  expandedExtraHeight: 350 - 150,
+  outerExpandedItemHeight: 350 + 20,
 };
 
 describe('GridStyles', () => {
