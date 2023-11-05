@@ -42,7 +42,7 @@ Then open [`localhost:1234`](http://localhost:1234) in a browser.
 
 ### Code sandbox
 
-You can check this component on [https://codesandbox.io/](https://codesandbox.io/s/expandable-grid-cw8zx)
+You can check this component on [https://codesandbox.io/](https://codesandbox.io/p/github/dPaskhin/expandable-grid/master)
 
 ## Base usage of the component
 
