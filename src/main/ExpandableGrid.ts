@@ -1,9 +1,17 @@
 import React from 'react';
 import { Grid } from './Grid';
-import { ExpandableGridParameters, GridStyles } from './GridStyles';
+import { GridStyles } from './GridStyles';
 import { useRerender } from './useRerender';
+import {
+  ExpandableGridParameters,
+  MediaQueryParametersMap,
+  MediaQueryValue,
+  normalizeColumnsCount,
+  normalizeParameters,
+} from './normalizeParameters';
+import { useWindowWidth } from './useWindowWidth';
 
-export type { ExpandableGridParameters };
+export type { ExpandableGridParameters, MediaQueryParametersMap };
 
 export interface IExpandableGridItemProps {
   index: number;
@@ -15,7 +23,7 @@ export interface IExpandableGridItemProps {
 
 export interface IExpandableGridProps {
   items: Array<React.FC<IExpandableGridItemProps>>;
-  columnsCount: number;
+  columnsCount: MediaQueryValue;
   parameters?: Partial<ExpandableGridParameters>;
   gridClassName?: string;
   gridItemClassName?: string;
@@ -38,9 +46,17 @@ export const ExpandableGrid: React.FC<IExpandableGridProps> = (props) => {
 
   const rerender = useRerender();
 
-  const grid = React.useMemo(() => new Grid(columnsCount, items.length, rerender), [columnsCount, items.length]);
+  const windowWidth = useWindowWidth();
 
-  const gridStyles = React.useMemo(() => new GridStyles(grid, parameters || {}), [grid, parameters]);
+  const normalizedColumnsCount = normalizeColumnsCount(columnsCount, windowWidth);
+  const normalizedParameters = normalizeParameters(parameters, windowWidth);
+
+  const grid = React.useMemo(
+    () => new Grid(normalizedColumnsCount, items.length, rerender),
+    [normalizedColumnsCount, items.length]
+  );
+
+  const gridStyles = React.useMemo(() => new GridStyles(grid, normalizedParameters), [grid, normalizedParameters]);
 
   return React.createElement(
     'div',

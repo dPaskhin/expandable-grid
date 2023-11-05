@@ -9,7 +9,7 @@
     "noUncheckedIndexedAccess": true,
     "moduleResolution": "Node",
     "module": "ESNext",
-    "lib": ["es2022"],
+    "lib": ["ESNext"],
     "noEmit": true
   },
   "include": ["./src/**/*"]

@@ -1,37 +1,14 @@
 import type { CSSProperties } from 'react';
 import type { Grid, Item } from './Grid';
-
-export interface ExpandableGridParameters {
-  rowGap: number;
-  columnGap: number;
-  itemHeight: number;
-  expandedItemHeight: number;
-}
+import type { NormalizedParameters } from './normalizeParameters';
 
 type ItemPosition = Pick<CSSProperties, 'top' | 'left' | 'right'>;
 
-const DEFAULT_PARAMETERS: ExpandableGridParameters = {
-  rowGap: 20,
-  columnGap: 20,
-  itemHeight: 150,
-  expandedItemHeight: 350,
-};
-
-interface NormalizedParameters extends ExpandableGridParameters {
-  outerItemHeight: number;
-  outerExpandedItemHeight: number;
-  expandedExtraHeight: number;
-}
-
 export class GridStyles {
-  private readonly parameters: NormalizedParameters;
-
   constructor(
     private readonly grid: Grid,
-    parameters: Partial<ExpandableGridParameters>
-  ) {
-    this.parameters = this.normalizeParameters(parameters);
-  }
+    private readonly parameters: NormalizedParameters
+  ) {}
 
   public getGridStyles(): CSSProperties {
     return {
@@ -40,6 +17,7 @@ export class GridStyles {
       marginLeft: -this.parameters.columnGap / 2,
       width: `calc(100% + ${this.parameters.columnGap}px)`,
       height: this.calculateGridHeight(),
+      willChange: 'transform',
     };
   }
 
@@ -55,23 +33,6 @@ export class GridStyles {
       } as CSSProperties,
       this.calculateItemPosition(item)
     );
-  }
-
-  private normalizeParameters(parameters: Partial<ExpandableGridParameters>): NormalizedParameters {
-    const normalized: NormalizedParameters = Object.assign(
-      DEFAULT_PARAMETERS,
-      {
-        outerItemHeight: DEFAULT_PARAMETERS.rowGap + DEFAULT_PARAMETERS.itemHeight,
-        outerExpandedItemHeight: DEFAULT_PARAMETERS.rowGap + DEFAULT_PARAMETERS.expandedItemHeight,
-        expandedExtraHeight: DEFAULT_PARAMETERS.expandedItemHeight - DEFAULT_PARAMETERS.itemHeight,
-      },
-      parameters
-    );
-
-    normalized.outerItemHeight = normalized.itemHeight + normalized.rowGap;
-    normalized.outerExpandedItemHeight = normalized.expandedItemHeight + normalized.rowGap;
-
-    return normalized;
   }
 
   private calculateGridHeight(): number {
