@@ -1,6 +1,6 @@
 {
   "name": "expandable-grid",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React grid component with expandable items and adaptive functionality, crafted using position: absolute CSS.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
